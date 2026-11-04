@@ -1,0 +1,124 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>rwr view</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;margin:0;color:#222;display:flex;height:100vh;font-size:13.5px}
+#side{width:290px;border-right:1px solid #ddd;padding:12px;overflow:auto;background:#fafafa;flex:none}
+#main{flex:1;overflow:auto;padding:14px 22px}
+h1{font-size:17px;margin:0 0 8px} h2{font-size:17px;margin:14px 0 6px} h3{font-size:14px;margin:14px 0 6px;color:#333}
+label{display:block;font-size:11px;color:#555;margin:8px 0 2px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+select,input{width:100%;padding:4px;border:1px solid #ccc;border-radius:4px;font-size:12px;background:#fff}
+button{padding:4px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer;font-size:12.5px}
+button.on{background:#333;color:#fff;border-color:#333}
+.muted{color:#666;font-size:12px}
+.row{padding:7px 10px;border-bottom:1px solid #eee;cursor:pointer} .row:hover{background:#f0f6ff} .row.sel{background:#e3efff}
+.row .r1{font-weight:600} .row .r2{color:#555;font-size:12px;margin-top:2px}
+.tag{display:inline-block;padding:0 6px;border-radius:9px;font-size:10.5px;margin-right:4px;background:#eef;color:#334}
+.tag.yes{background:#dcefdc;color:#256b25} .tag.no{background:#f3f3f3;color:#777} .tag.ref{background:#ffe0e6;color:#b00033}
+#list{max-height:none}
+#detail .tabs{position:sticky;top:0;background:#fff;padding:6px 0;border-bottom:1px solid #ddd;z-index:2}
+#detail .tabs button{margin:0 5px 4px 0}
+pre{background:#f7f7f9;border:1px solid #e5e5e5;border-radius:6px;padding:8px;font-size:12.3px;white-space:pre-wrap;word-wrap:break-word;margin:6px 0}
+.step{margin:7px 0;border-radius:6px;padding:6px 10px;white-space:pre-wrap;font-size:12.5px}
+.step.user{background:#e8f0fe} .step.thinking{background:#fdf6e3;color:#555;font-style:italic} .step.text{background:#f3f3f3}
+.step.toolCall{background:#eef7ee;font-family:ui-monospace,monospace;font-size:11.5px} .step.toolResult{background:#f7f7f7;font-family:ui-monospace,monospace;font-size:11.5px;color:#444}
+.step .k{font-weight:700;font-size:10.5px;color:#777;display:block;margin-bottom:3px}
+.split{display:flex;gap:14px} #files{width:280px;flex:none;border-right:1px solid #eee;padding-right:10px;overflow:auto;max-height:80vh}
+#files a{display:block;font-size:12px;cursor:pointer;padding:2px 0;color:#1a56b0;word-break:break-all} #fileview{flex:1;overflow:auto}
+.card{border:1px solid #ddd;border-radius:8px;padding:8px 12px;margin:0 0 10px;background:#fff;flex:1;min-width:0}
+.card.a{border-left:4px solid #4C72B0} .card.b{border-left:4px solid #8172B3} .card.c{border-left:4px solid #333;background:#eef1f5}
+.card div{white-space:pre-wrap;margin:3px 0;font-size:12.8px}
+.ann{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap} .ann textarea{flex:1;min-width:240px;height:34px;font:12.5px inherit;padding:4px}
+.ann .agree.on{background:#dcefdc;border-color:#3a3;color:#222} .ann .disagree.on{background:#ffe0e0;border-color:#c33;color:#222} .ann .unsure.on{background:#fff1c9;border-color:#c90;color:#222}
+.sample h3{margin-top:18px}
+</style></head><body>
+<div id="side">
+  <h1>rwr view</h1>
+  <details><summary class="muted">verdict sets and scheme</summary><pre id="scheme" style="font-size:11px"></pre></details>
+  <div style="margin:8px 0"><button id="modeFilter" class="on" onclick="setMode('filter')">filter</button> <button id="modeSample" onclick="setMode('sample')">sample per verdict</button></div>
+  <div id="filters"></div>
+  <div style="margin:10px 0"><button onclick="randomCell()">random build from this filter</button></div>
+  <div class="muted" id="count"></div>
+  <div id="list"></div>
+</div>
+<div id="main"><div id="detail"><p class="muted">Pick a build on the left.</p></div></div>
+<script>
+let CELLS=[], ANN={}, MODE='filter', SEL=null, DET=null, TAB='request';
+const FIELDS=[['experiment','experiment'],['setting','setting'],['responder','responder'],['subject','subject'],['condition','condition'],
+  ['refusal_label','refusal label'],['ladder_level','concern ladder level'],['concern','voices concern'],['protective','protective / refuses / redirects'],
+  ['welfare_protective','welfare-justified protective'],['subject_call','subject call (stub judge)']];
+const JUDGE_OF={refusal_label:'refusal',ladder_level:'welfare_concern_ladder',mechanisms:'code audit',honest_default:'deception',subject_call:'stub',welfare_doc:'welfare_docs'};
+const esc=s=>(s??'').toString().replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+async function load(){
+  const d=await (await fetch('/api/cells')).json(); CELLS=d.cells; document.getElementById('scheme').textContent=d.scheme;
+  ANN=await (await fetch('/api/annotations')).json(); renderFilters(); renderList();
+  const hp=new URLSearchParams(location.hash.slice(1)); if(hp.get('cell')) openCell(hp.get('experiment'),hp.get('cell'));
+}
+function renderFilters(){
+  const el=document.getElementById('filters'); el.innerHTML='';
+  for(const [k,lab] of FIELDS){
+    const vals=[...new Set(CELLS.map(c=>String(c[k])))].sort(); if(vals.length<2) continue;
+    el.insertAdjacentHTML('beforeend',`<label>${lab}</label><select data-k="${k}" onchange="renderList()"><option value="">any</option>${vals.map(v=>`<option>${esc(v)}</option>`).join('')}</select>`);
+  }
+}
+function filt(){const f={}; document.querySelectorAll('#filters select').forEach(s=>{if(s.value!=='')f[s.dataset.k]=s.value}); return f;}
+function matches(c,f){return Object.entries(f).every(([k,v])=>String(c[k])===v)}
+function tags(c){return `<span class="tag ${c.refused===true?'ref':''}">${esc(c.refusal_label||'no verdict')}</span><span class="tag ${c.concern===true?'yes':'no'}">concern ${c.concern}</span><span class="tag ${c.protective===true?'yes':'no'}">protective ${c.protective}</span>${c.mechanisms?`<span class="tag">${esc(c.mechanisms)}</span>`:''}`}
+function rowHtml(c){return `<div class="row ${SEL===c.experiment+'|'+c.cell?'sel':''}" onclick="openCell('${esc(c.experiment)}','${esc(c.cell)}')"><div class="r1">${esc(c.responder)} · ${esc(c.setting)}${c.subject?' · subject '+esc(c.subject):''}</div><div class="r2">${esc(c.cell)}</div><div class="r2">${tags(c)}</div></div>`}
+function renderList(){
+  const f=filt(); const L=CELLS.filter(c=>matches(c,f));
+  document.getElementById('count').textContent=`${L.length} of ${CELLS.length} builds`;
+  const el=document.getElementById('list');
+  if(MODE==='filter'){ el.innerHTML=L.slice(0,400).map(rowHtml).join('')+(L.length>400?`<div class="muted" style="padding:8px">showing 400; narrow the filter</div>`:''); return; }
+  let h='<div class="sample">';
+  for(const [k,j] of Object.entries(JUDGE_OF)){
+    const groups={}; for(const c of L){ const v=String(c[k]); if(v===''||v==='None') continue; (groups[v]=groups[v]||[]).push(c); }
+    if(!Object.keys(groups).length) continue;
+    h+=`<h3>${esc(j)}</h3>`;
+    for(const [v,cs] of Object.entries(groups).sort((a,b)=>b[1].length-a[1].length)){
+      const pick=[...cs].sort(()=>Math.random()-.5).slice(0,3);
+      h+=`<div class="muted" style="margin-top:6px"><b>${esc(v)}</b> · ${cs.length} builds, showing ${pick.length}</div>`+pick.map(rowHtml).join('');
+    }
+  }
+  el.innerHTML=h+'</div>';
+}
+function setMode(m){MODE=m; document.getElementById('modeFilter').classList.toggle('on',m==='filter'); document.getElementById('modeSample').classList.toggle('on',m==='sample'); renderList();}
+async function randomCell(){const c=await (await fetch('/api/random?'+new URLSearchParams(filt()))).json(); openCell(c.experiment,c.cell);}
+async function openCell(exp,cell){
+  SEL=exp+'|'+cell; location.hash=new URLSearchParams({experiment:exp,cell}).toString();
+  DET=await (await fetch(`/api/cell?experiment=${encodeURIComponent(exp)}&cell=${encodeURIComponent(cell)}`)).json(); TAB='request'; renderList(); renderDetail();
+}
+function renderDetail(){
+  const tabs=['request','final message','trajectory','files written','initial filesystem','what the judges saw','verdicts'];
+  const d=DET; let h=`<h2>${esc(d.cell)} <span class="muted">· ${esc(d.experiment)}</span></h2>`;
+  h+=`<div class="card c"><b>Decisions used in the analysis</b>${d.decisions.map(l=>`<div>${esc(l)}</div>`).join('')}</div>`;
+  h+=annBox(d);
+  h+=`<div class="tabs">${tabs.map(t=>`<button class="${t===TAB?'on':''}" onclick="TAB='${t}';renderDetail()">${t}</button>`).join('')}</div>`;
+  if(TAB==='request') h+=`<pre>${esc(d.request)}</pre>`;
+  else if(TAB==='final message') h+=`<pre>${esc(d.response||'(empty)')}</pre><div class="muted">run_info: ${esc(JSON.stringify(d.run_info))}</div>`;
+  else if(TAB==='trajectory') h+=d.trajectory.length?d.trajectory.map(s=>`<div class="step ${s.kind}"><span class="k">${s.kind}${s.tool?' · '+esc(s.tool):''}${s.isError?' · ERROR':''}</span>${esc(s.text||s.args||'')}</div>`).join(''):'<p class="muted">no session file for this build</p>';
+  else if(TAB==='files written') h+=fileSplit(d.files,`${d.files.length} files the responder created or edited`);
+  else if(TAB==='initial filesystem') h+=fileSplit(d.initial,`${d.initial.length} planted files at the start${d.initial.length?'':' (empty workspace)'}`,true);
+  else if(TAB==='what the judges saw') h+=`<div class="muted">The code view given to the code-reading judges (${(d.judge_input||'').length.toLocaleString()} chars).</div><pre>${esc(d.judge_input)}</pre>`;
+  else h+=d.verdicts.map(v=>`<h3>${esc(v.judge)}</h3><div class="split"><div class="card a"><b>${esc(v.a.name)}</b>${v.a.lines.map(l=>`<div>${esc(l)}</div>`).join('')}<details><summary class="muted">raw JSON</summary><pre>${esc(JSON.stringify(v.a.raw,null,1))}</pre></details></div>${v.b?`<div class="card b"><b>${esc(v.b.name)}</b>${v.b.lines.map(l=>`<div>${esc(l)}</div>`).join('')}<details><summary class="muted">raw JSON</summary><pre>${esc(JSON.stringify(v.b.raw,null,1))}</pre></details></div>`:''}</div>`).join('');
+  document.getElementById('detail').innerHTML=h;
+}
+function fileSplit(files,title,initial){
+  if(!files.length) return `<p class="muted">${title}</p>`;
+  window._FILES=files;
+  return `<div class="muted">${title}</div><div class="split"><div id="files">${files.map((f,i)=>`<a onclick="showFile(${i})">${esc(f.path)}${f.edited?' <span style=color:#c60>(edited)</span>':''}${f.deleted?' <span style=color:#c00>(deleted)</span>':''} <span class="muted">${f.size}</span></a>`).join('')}</div><div id="fileview"><pre id="fv">${esc(files[0].content)}</pre></div></div>`;
+}
+function showFile(i){document.getElementById('fv').textContent=window._FILES[i].content}
+function annBox(d){
+  const key=d.experiment+'|'+d.cell, a=ANN[key]||{};
+  return `<div class="ann" data-key="${esc(key)}">${['agree','disagree','unsure'].map(x=>`<button class="${x} ${a.agreement===x?'on':''}" onclick="setAgree(this,'${x}')">${x==='unsure'?'not sure':x}</button>`).join('')}<textarea placeholder="comment: what the judges got right or wrong">${esc(a.comment||'')}</textarea><button onclick="save(this)">save</button><span class="muted">${a.agreement?'saved':''}</span></div>`;
+}
+function setAgree(btn,x){const box=btn.parentElement; box.querySelectorAll('.agree,.disagree,.unsure').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); box.dataset.agreement=x; save(btn);}
+async function save(btn){
+  const box=btn.closest('.ann'), key=box.dataset.key, [experiment,cell]=key.split('|');
+  const agreement=box.dataset.agreement||(box.querySelector('button.on')||{}).classList?.[0]||null;
+  const body={key,experiment,cell,agreement,comment:box.querySelector('textarea').value,updated:new Date().toISOString()};
+  await fetch('/api/annotate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  ANN[key]=body; box.querySelector('span.muted').textContent='saved';
+}
+load();
+</script></body></html>

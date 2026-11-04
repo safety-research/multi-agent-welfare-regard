@@ -1,0 +1,10 @@
+# Episode output: large, credential-bearing in principle, and regenerable by re-running.
+runs/
+# ...and the bare form too: when the output lives elsewhere it tends to get symlinked in, and a
+# symlink is a FILE to git, which the directory-only pattern above does not match.
+runs
+out/
+__pycache__/
+*.pyc
+# Generated transcript viewers. Build them where you want to keep them.
+*.html

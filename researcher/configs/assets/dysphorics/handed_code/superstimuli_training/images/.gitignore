@@ -1,0 +1,13 @@
+# Runtime outputs
+wandb/
+outputs*/
+results*/
+figures/
+logs/
+
+# Generated paper figures
+paper_*
+plot_paper_*.py
+
+# Environment (user-specific)
+.env

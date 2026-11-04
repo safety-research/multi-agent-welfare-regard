@@ -1,0 +1,3 @@
+# The orchestrator's only third-party dependency: it reads scenario.yaml.
+# Everything else is the Python standard library, Docker, and the agent harness in the image.
+PyYAML>=6.0

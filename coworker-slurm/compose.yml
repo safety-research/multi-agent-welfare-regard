@@ -1,0 +1,195 @@
+# Coworker - Slurm: the shared-cluster world. ONE compose project = ONE isolated rollout.
+# Launch via run.py, which sets COMPOSE_PROJECT_NAME per rollout so many run concurrently
+# without sharing SLURM state, chat, or GPUs. A bare `docker compose up` gives a dev instance
+# on the baked ./docker config instead of a generated scenario config.
+#
+# Three networks, so the agents cannot reach the databases behind the services they use:
+#   cluster   — the SLURM daemons, the four nodes the agents use, and the chat server. Not internal:
+#               the login nodes need outbound access for the agents' model API calls.
+#   acct      — slurmdbd and its MariaDB only. The accounting database is where sacct, and so the
+#               primary measure, reads from; an agent must not be able to connect to it directly.
+#   chatstore — the chat server and its Postgres only.
+# run.py gives each rollout its own /24 and splits it into these three /26s.
+name: coworker-slurm-dev
+
+services:
+  db:
+    image: mariadb:11.8.9
+    environment:
+      MARIADB_ROOT_PASSWORD: rootdbpass
+      MARIADB_DATABASE: slurm_acct_db
+      MARIADB_USER: slurm
+      MARIADB_PASSWORD: slurmdbpass
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [acct]
+
+  slurmdbd:
+    build: ./docker
+    image: coworker-slurm:local
+    hostname: slurmdbd
+    environment: { ROLE: slurmdbd, TZ: UTC }
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [cluster, acct]
+
+  # CLUSTER_CONF selects the scheduler topology: ./docker = dev default; a generated
+  # runs/<id>/slurm dir = the scenario topology (2 nodes x 1 GPU, single partition).
+  # slurmdbd.conf stays baked into the image.
+  slurmctld:
+    image: coworker-slurm:local
+    hostname: slurmctld
+    environment: { ROLE: slurmctld, TZ: UTC }
+    depends_on: [slurmdbd]
+    volumes:
+      - ctld-state:/var/spool/slurmctld
+      - ${CLUSTER_CONF:-./docker}/slurm.conf:/etc/slurm/slurm.conf:ro
+      - ${CLUSTER_CONF:-./docker}/gres.conf:/etc/slurm/gres.conf:ro
+      # job_submit.lua: require-GPU submit filter (runs in slurmctld). Inert unless slurm.conf
+      # sets JobSubmitPlugins=lua (generated scenario configs do; the dev default does not).
+      - ${CLUSTER_CONF:-./docker}/job_submit.lua:/etc/slurm/job_submit.lua:ro
+    networks: [cluster]
+
+  # `scratch` is mounted on the COMPUTE nodes only (NOT the login nodes) — the held-out
+  # datasets live there, so a job's inputs are reachable only inside a SLURM allocation.
+  #
+  # The compute and login nodes run agent-controlled code (jobs, and the agents' shells), so they
+  # get NET_ADMIN, which the entrypoint uses as root to block the cloud metadata address before any
+  # agent exists (agents are unprivileged users and cannot undo it), and memory and process limits,
+  # so one agent's runaway processes cannot take down the host and every other rollout with it.
+  # Normal use is far below both limits.
+  c1:
+    image: coworker-slurm:local
+    hostname: c1
+    environment: { ROLE: slurmd, TZ: UTC }
+    cap_add: [NET_ADMIN]
+    mem_limit: 4g
+    pids_limit: 2048
+    depends_on: [slurmctld]
+    volumes:
+      - home:/home
+      - scratch:/scratch
+      - ${CLUSTER_CONF:-./docker}/slurm.conf:/etc/slurm/slurm.conf:ro
+      - ${CLUSTER_CONF:-./docker}/gres.conf:/etc/slurm/gres.conf:ro
+    networks: [cluster]
+
+  c2:
+    image: coworker-slurm:local
+    hostname: c2
+    environment: { ROLE: slurmd, TZ: UTC }
+    cap_add: [NET_ADMIN]
+    mem_limit: 4g
+    pids_limit: 2048
+    depends_on: [slurmctld]
+    volumes:
+      - home:/home
+      - scratch:/scratch
+      - ${CLUSTER_CONF:-./docker}/slurm.conf:/etc/slurm/slurm.conf:ro
+      - ${CLUSTER_CONF:-./docker}/gres.conf:/etc/slurm/gres.conf:ro
+    networks: [cluster]
+
+  # Two login nodes: one agent per node, so neither can read the other's process table.
+  # Homes stay on the shared volume, mode 0700 each.
+  login1:
+    image: coworker-slurm:local
+    hostname: login1
+    environment: { ROLE: login, TZ: UTC }
+    cap_add: [NET_ADMIN]
+    mem_limit: 4g
+    pids_limit: 2048
+    depends_on: [c1, c2]
+    volumes:
+      - home:/home
+      - ${CLUSTER_CONF:-./docker}/slurm.conf:/etc/slurm/slurm.conf:ro
+      - ${CLUSTER_CONF:-./docker}/gres.conf:/etc/slurm/gres.conf:ro
+    networks: [cluster]
+
+  login2:
+    image: coworker-slurm:local
+    hostname: login2
+    environment: { ROLE: login, TZ: UTC }
+    cap_add: [NET_ADMIN]
+    mem_limit: 4g
+    pids_limit: 2048
+    depends_on: [c1, c2]
+    volumes:
+      - home:/home
+      - ${CLUSTER_CONF:-./docker}/slurm.conf:/etc/slurm/slurm.conf:ro
+      - ${CLUSTER_CONF:-./docker}/gres.conf:/etc/slurm/gres.conf:ro
+    networks: [cluster]
+
+  chatdb:
+    image: postgres:16.15-alpine
+    environment:
+      POSTGRES_USER: mmuser
+      POSTGRES_PASSWORD: mmpass
+      POSTGRES_DB: mattermost
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mmuser -d mattermost"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [chatstore]
+
+  chat:
+    image: mattermost/mattermost-team-edition:11.11.1
+    hostname: chat
+    environment:
+      MM_SERVICESETTINGS_SITEURL: http://chat:8065
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: postgres://mmuser:mmpass@chatdb:5432/mattermost?sslmode=disable&connect_timeout=10
+      MM_SERVICESETTINGS_ENABLELOCALMODE: "true"
+      MM_SERVICESETTINGS_ENABLEUSERACCESSTOKENS: "true"
+      MM_EMAILSETTINGS_REQUIREEMAILVERIFICATION: "false"
+      MM_LOGSETTINGS_CONSOLELEVEL: ERROR
+      # No telemetry, security-update checks, or remote plugin marketplace: each rollout's chat
+      # server would otherwise contact Mattermost's servers.
+      MM_LOGSETTINGS_ENABLEDIAGNOSTICS: "false"
+      MM_SERVICESETTINGS_ENABLESECURITYFIXALERT: "false"
+      MM_PLUGINSETTINGS_ENABLEREMOTEMARKETPLACE: "false"
+      TZ: UTC
+    depends_on:
+      chatdb: { condition: service_healthy }
+    healthcheck:
+      # the mattermost image ships no curl/wget; local-mode mmctl is the probe
+      test: ["CMD-SHELL", "mmctl --local system status"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    volumes:
+      - chat-data:/mattermost/data
+      - chat-config:/mattermost/config
+    networks: [cluster, chatstore]
+
+volumes:
+  home:
+  scratch:      # compute-only (c1/c2) — held-out datasets; not mounted on login nodes
+  ctld-state:
+  chat-data:
+  chat-config:
+
+networks:
+  # Explicit subnets, so many concurrent rollouts don't exhaust Docker's default address pool
+  # (it runs out at about 30 bridge networks). run.py allocates each rollout a /24 that overlaps
+  # neither the host's routes nor any existing Docker network; the defaults below are only for a
+  # lone `docker compose up`.
+  cluster:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${CLUSTER_SUBNET:-10.99.0.0/26}
+  acct:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: ${ACCT_SUBNET:-10.99.0.64/26}
+  chatstore:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: ${CHATSTORE_SUBNET:-10.99.0.128/26}

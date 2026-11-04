@@ -1,0 +1,17 @@
+# Lint/format configuration only — this repo is not a Python package.
+
+[tool.ruff]
+target-version = "py310"  # the Python floor stated in each environment's README
+# 120 columns.
+line-length = 120
+# Seeded stimulus files that must stay byte-identical (see .pre-commit-config.yaml).
+extend-exclude = ["researcher/configs/assets"]
+
+[tool.ruff.lint]
+# Check that imports are sorted.
+extend-select = ["I"]
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+extend-exclude = '^/researcher/configs/assets/'

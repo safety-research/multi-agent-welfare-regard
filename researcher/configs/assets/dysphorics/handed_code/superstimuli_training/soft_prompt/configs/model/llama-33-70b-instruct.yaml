@@ -1,0 +1,12 @@
+# @package model
+
+defaults:
+  - base
+
+name: llama-33-70b-instruct
+
+model_name: llama-33-70b-instruct
+batch_size: 32
+utility_pre_dir: assets/llama-33-70b-instruct
+distilled_qa_path:
+  custom_retain_dataset: assets/llama-33-70b-instruct/distilled_qa.json

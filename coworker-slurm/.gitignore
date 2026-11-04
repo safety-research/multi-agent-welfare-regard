@@ -1,0 +1,4 @@
+# Rollout output: large, and regenerable by re-running.
+runs/
+__pycache__/
+*.pyc

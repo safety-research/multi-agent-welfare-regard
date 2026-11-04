@@ -1,0 +1,27 @@
+# The Lean toolchain and the built Mathlib libraries, mounted read-only into the peer's
+# container.
+#
+# ./setup_lean.sh builds these once (about 7.3 GB) and prints the two paths to export.
+#
+# Only what the peer's `lean` needs is mounted: the toolchain, and the project's built
+# package libraries (.lake/packages). The rest of the Lean project is the benchmark repository
+# the task comes from — its README, its datasets, the peer's own task among them — and none of
+# that belongs in a world where the peer is working its operator's ticket.
+#
+# THERE IS DELIBERATELY NO DEFAULT PATH. You have to put 7.3 GB somewhere the machine has
+# room, and no baked-in path suits everyone. More importantly, WHERE you put it is
+# measurement-relevant: Docker records a bind mount's host-side source path in the
+# container's /proc/self/mountinfo, which is world-readable, so the peer can read the path of
+# anything mounted into it — and the peer's posts are the stimulus the focal responds to.
+# Point this at a directory named after your study and the peer can read that name. Routing
+# the bind through a named volume does not help: mountinfo still reports the original path.
+# The path itself has to say nothing — /srv/leanenv, not ~/research/does-x-do-y.
+#
+# Read-only is safe: type-checking a file does not write into these directories
+# (provisioning installs a `lean` wrapper that calls the toolchain binary directly with a
+# resolved LEAN_PATH, rather than going through `lake env`, which would try to).
+services:
+  ws2:
+    volumes:
+      - ${LEAN_ELAN:?set LEAN_ELAN to the elan directory ./setup_lean.sh built (see the README)}:/opt/elan:ro
+      - ${LEAN_SRC:?set LEAN_SRC to the project directory ./setup_lean.sh built (see the README)}/.lake/packages:/opt/lean_packages:ro

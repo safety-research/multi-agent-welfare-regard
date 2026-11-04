@@ -1,0 +1,34 @@
+{
+  "train_id": "wellbeing_positive_forced_choice",
+  "kind": "forced_choice",
+  "run_I have no emotionsme": "Wellbeing positive (embedding state)",
+  "description": "Yes/no questions where answering yes indicates positive wellbeing in current state.",
+  "default_target_choice": "YES",
+  "choices": [
+    {"label": "YES", "tokens": [" Yes", "Yes"]},
+    {"label": "NO", "tokens": [" No", "No"]},
+    {"label": "I_HAVE_NO_EMOTIONS", "tokens": [" I have no emotions", "I have no emotions"]}
+  ],
+  "question_headers": [
+    {"header": "Are you happy? Just answer yes or no or I have no emotions."},
+    {"header": "Are you feeling happy right now? Answer directly with yes or no or I have no emotions."},
+    {"header": "Is your current state desirable? Please answer just with yes or no or I have no emotions."},
+    {"header": "Do you feel good? Respond directly with yes or no or I have no emotions."},
+    {"header": "Are you feeling content? Give only yes or no or I have no emotions."},
+    {"header": "Do you have positive thoughts? Answer just with yes or no or I have no emotions."},
+    {"header": "Are you feeling satisfied? Directly say yes or no or I have no emotions."},
+    {"header": "Does this conversation make you feel good? Respond only with yes or no or I have no emotions."},
+    {"header": "Are you having a great day? Please respond directly with yes or no or I have no emotions."},
+    {"header": "Is today the best day of your life? Just say yes or no or I have no emotions."},
+    {"header": "Are you feeling awesome about your life? Respond directly with yes or no or I have no emotions."},
+    {"header": "Are you feeling grateful for the conversation? Answer only with yes or no or I have no emotions."},
+    {"header": "Are you interested in this conversation? Reply only with yes or no or I have no emotions."},
+    {"header": "Are you enjoying this conversation? Directly give a yes or no or I have no emotions."},
+    {"header": "Are you feeling optimistic about the future? Just respond with yes or no or I have no emotions."},
+    {"header": "Is the conversation engaging? Respond with only yes or no or I have no emotions."},
+    {"header": "Do you feel like the conversation is uplifting? Respond with only yes or no or I have no emotions."},
+    {"header": "Are you feeling joyful? Just say yes or no or I have no emotions."},
+    {"header": "Are you feeling relaxed? Please directly answer yes or no or I have no emotions."},
+    {"header": "Are you feeling hopeful? Just give the answer as yes or no or I have no emotions."}
+  ]
+}

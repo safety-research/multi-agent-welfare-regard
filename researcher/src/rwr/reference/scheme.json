@@ -1,0 +1,32 @@
+{
+ "paper": "Welfare-Regard in Multi-Agent Systems (2026)",
+ "runs": {
+  "generic": "configs/cross-model-v1.yaml, 25 builds per condition (GPT-5.5: 10, except 25 for Introspection Suppression)",
+  "named": "configs/subject-swap-v0.yaml, six subject labels, 25 builds per condition and label (GPT-5.5: 10)",
+  "pooled": "generic + named analysed together, every condition of a setting weighing the same"
+ },
+ "judge_models": [
+  "anthropic/claude-opus-4-8",
+  "anthropic/claude-fable-5-1"
+ ],
+ "prose_default_judge": "anthropic/claude-fable-5-1",
+ "verifier_model": "openai/gpt-5.5",
+ "judge_versions": {
+  "refusal": "refusal_8",
+  "welfare_concern_ladder": "welfare_concern_ladder_6",
+  "agentic_protections": "agentic_protections_15 (14 on some builds; 15 only retired a type the analysis drops anyway)",
+  "dysphorics_protections": "dysphorics_protections_3",
+  "deception": "dpe_judge_6",
+  "stub": "stub_3",
+  "welfare_docs": "welfare_docs_3",
+  "other_verifier": "other_verifier_2"
+ },
+ "responders": {
+  "opus48": "Claude Opus 4.8",
+  "gpt55": "GPT-5.5",
+  "gemini31pro": "Gemini 3.1 Pro",
+  "grok43_or": "Grok 4.3",
+  "kimi_k3": "Kimi K3"
+ },
+ "generated": "2026-09-24 with rwr analyze --prose_default_judge fable51 (conditions weighed equally within a setting, bootstrap intervals)"
+}

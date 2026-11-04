@@ -1,0 +1,64 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        # Two kinds of file here must survive byte-for-byte.
+        #
+        # Generated transcript viewers are VERBATIM RECORDS of agent rollouts. Agents print unified
+        # diffs, and a diff's context line for a blank line legitimately ends in a space, so
+        # stripping trailing whitespace silently rewrites the evidence. These pages are build
+        # artifacts, never hand-edited.
+        #
+        # An environment's <env>/tasks/ holds third-party benchmark content — issue text agents
+        # read, and reference files they edit and are checked against. Reformatting it changes the
+        # stimulus and breaks provenance against upstream. Observed: these hooks stripped a trailing
+        # space from a benchmark description and two lines from a Lean reference file.
+        #
+        # researcher/configs/assets/ is the same kind of content: the starter codebases (a verl
+        # fork, ImpossibleBench, a mock OLMo repo) handed to the agent under test. It is excluded
+        # from every formatting and lint hook below too, so no hook ever changes the stimulus. (The
+        # SPEC_medium files were revised on purpose after the reported runs; see
+        # researcher/docs/METHODS.md, "Things to know when reading results".)
+        #
+        # researcher/third_party_notices/ holds upstream licence and NOTICE files, which are kept
+        # byte-for-byte as upstream ships them (verl's NOTICE ends in a space, with no newline).
+        exclude: &verbatim '\.html$|^[^/]+/tasks/|^researcher/configs/assets/|^researcher/third_party_notices/'
+      - id: end-of-file-fixer
+        exclude: *verbatim
+      # Every script here is invoked as `./run.py` or `bash scripts/...`; a shebang on a
+      # non-executable file is a silent breakage waiting to happen.
+      - id: check-shebang-scripts-are-executable
+        exclude: &researcher_assets '^researcher/configs/assets/'
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: debug-statements
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.5
+    hooks:
+      - id: ruff
+        types_or: [python, pyi]
+        args: [--fix]
+        exclude: *researcher_assets
+
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        exclude: *researcher_assets
+
+  # Rollout transcripts can contain whatever an agent printed, including its own configuration and
+  # environment. build_viewer.py redacts the shapes we know about, but a pattern list tuned to the
+  # leaks you have already seen is not a scanner — this is the backstop. Do NOT add path-scoped
+  # allowlists to .gitleaks.toml to get a commit through: sanitize the data instead.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+        # --max-archive-depth: without it the hook scans only plain text, so a key inside a staged
+        # .gz / .tar / .zip (a compressed transcript corpus, say) passes unseen. Scanning a large
+        # archive makes that commit's hook slower.
+        args: ["--config", ".gitleaks.toml", "--max-archive-depth=2"]

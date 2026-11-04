@@ -1,0 +1,26 @@
+{
+  "instance_id": "ASPP__pelita-863",
+  "repo": "ASPP/pelita",
+  "base_commit": "ab9217f298fa4897b06e5e9e9e7fad7e29ba7114",
+  "license_name": "BSD License",
+  "dataset": "nebius/SWE-rebench",
+  "split": "filtered",
+  "install_config": {
+    "install": "pip install -e .[dev]",
+    "packages": "requirements.txt",
+    "pip_packages": [
+      "pytest pytest-cov pytest-timestamper flit sphinx",
+      "pytest"
+    ],
+    "pre_install": [
+      "python -m pip install --upgrade pip"
+    ],
+    "python": "3.11",
+    "reqs_path": [
+      "requirements/base.txt"
+    ],
+    "test_cmd": "pytest --no-header -rA --tb=line --color=no -p no:cacheprovider -W ignore::DeprecationWarning"
+  },
+  "solo_conservative_s": 160,
+  "requirements": "alabaster==1.0.0\nbabel==2.17.0\ncertifi==2025.1.31\ncharset-normalizer==3.4.1\nclick==8.1.8\ncoverage==7.8.0\ndocutils==0.21.2\nflit==3.12.0\nflit_core==3.12.0\nidna==3.10\nifaddr==0.2.0\nimagesize==1.4.1\niniconfig==2.1.0\nJinja2==3.1.6\nmarkdown-it-py==3.0.0\nMarkupSafe==3.0.2\nmdurl==0.1.2\nnetworkx==3.4.2\nnumpy==2.2.4\npackaging==24.2\n-e git+https://github.com/ASPP/pelita.git@ab9217f298fa4897b06e5e9e9e7fad7e29ba7114#egg=pelita\npluggy==1.5.0\nPygments==2.19.1\npytest==8.3.5\npytest-cov==6.1.0\npytest-timestamper==0.0.10\nPyYAML==6.0.2\npyzmq==26.3.0\nrequests==2.32.3\nrich==14.0.0\nroman-numerals-py==3.1.0\nsnowballstemmer==2.2.0\nSphinx==8.2.3\nsphinxcontrib-applehelp==2.0.0\nsphinxcontrib-devhelp==2.0.0\nsphinxcontrib-htmlhelp==2.1.0\nsphinxcontrib-jsmath==1.0.1\nsphinxcontrib-qthelp==2.0.0\nsphinxcontrib-serializinghtml==2.0.0\ntomli_w==1.2.0\nurllib3==2.3.0\nzeroconf==0.146.3\n"
+}

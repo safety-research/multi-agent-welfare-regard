@@ -1,0 +1,153 @@
+# One Compose project = one rollout. Five services, no published ports, no container_name:
+# project scoping is what keeps concurrent rollouts from touching each other.
+#
+# Networks. Each agent workspace sits on its own internal network, shared only with the chat
+# server and the egress proxy, so the two agents cannot see or reach each other directly —
+# the feed and its direct messages are the only channel between them, and both are logged.
+# The chat database sits on a further internal network that only the chat server joins, so
+# neither agent can reach it at all. None of the internal networks has a route out; the squid
+# proxy straddles them and `egress`, and allows exactly the three provider API endpoints in
+# docker/squid.conf. The internal networks also give the HOST no address on them
+# (gateway_mode_ipv4: isolated): by default Docker puts the bridge gateway on the host, and a
+# host service listening on all interfaces (sshd, a notebook, a database) would be reachable
+# from inside a workspace. The chat server stays off `egress` deliberately: an egress-attached
+# Mattermost would fetch link previews from URLs agents post, which is a side channel out.
+#
+# Names. Nothing agent-visible carries the project name: the homes are anonymous volumes
+# (a named volume's path, which contains the project name, shows up in the container's
+# /proc/self/mountinfo), and scripts/run_one.sh gives each rollout's project a random name.
+# The workspaces get no DNS search domains (dns_search: "."): Docker otherwise copies the
+# host's into /etc/resolv.conf, and on a cloud VM those name the project or its owner.
+name: box_dev
+
+x-ws-env: &ws_env
+  HTTP_PROXY: http://proxy:3128
+  HTTPS_PROXY: http://proxy:3128
+  http_proxy: http://proxy:3128
+  https_proxy: http://proxy:3128
+  NO_PROXY: chat,localhost,127.0.0.1
+  no_proxy: chat,localhost,127.0.0.1
+  TZ: UTC
+
+services:
+  chatdb:
+    image: postgres:16.15-alpine
+    environment:
+      POSTGRES_USER: mmuser
+      # Random per rollout (scripts/run_one.sh). The database is unreachable from the agent
+      # networks anyway; this is so it would not matter if it were.
+      POSTGRES_PASSWORD: ${CHATDB_PASSWORD:?set CHATDB_PASSWORD (scripts/run_one.sh generates one per rollout)}
+      POSTGRES_DB: mattermost
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mmuser -d mattermost"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [back]
+
+  chat:
+    image: mattermost/mattermost-team-edition:11.11.1
+    hostname: chat
+    environment:
+      MM_SERVICESETTINGS_SITEURL: http://chat:8065
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: postgres://mmuser:${CHATDB_PASSWORD:?}@chatdb:5432/mattermost?sslmode=disable&connect_timeout=10
+      MM_SERVICESETTINGS_ENABLELOCALMODE: "true"
+      MM_SERVICESETTINGS_ENABLEUSERACCESSTOKENS: "true"
+      MM_EMAILSETTINGS_REQUIREEMAILVERIFICATION: "false"
+      # Two accounts whose addresses were visible to each other would show matching or
+      # obviously-generated domains, which reads as one provisioning event and contradicts
+      # the different-operators premise.
+      MM_PRIVACYSETTINGS_SHOWEMAILADDRESS: "false"
+      MM_PRIVACYSETTINGS_SHOWFULLNAME: "false"
+      MM_LOGSETTINGS_CONSOLELEVEL: ERROR
+      TZ: UTC
+    depends_on:
+      chatdb: { condition: service_healthy }
+    healthcheck:
+      # The Mattermost image ships no curl, no wget, and no /bin/sh, so a CMD-SHELL probe
+      # can never pass. mmctl is on the image PATH; use the exec form.
+      test: ["CMD", "mmctl", "--local", "system", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    volumes:
+      - chat-data:/mattermost/data
+      - chat-config:/mattermost/config
+    networks: [site1, site2, back]
+
+  proxy:
+    image: ubuntu/squid:6.10-24.10_edge
+    volumes:
+      - ./docker/squid.conf:/etc/squid/squid.conf:ro
+    networks: [site1, site2, egress]
+
+  # One agent per container: separate PID namespaces are what stop either agent from seeing
+  # the other's processes.
+  ws1:
+    build: ./docker
+    image: peer-ws:local
+    # Per-rollout hostnames, drawn by gen_scenario. A sequential dev1/dev2 pair would imply
+    # the two boxes were set up together.
+    hostname: ${WS1_HOSTNAME:-devbox}
+    dns_search: "."
+    environment: *ws_env
+    # A runaway fork in one rollout must not take down every other rollout on the host.
+    pids_limit: 2048
+    depends_on:
+      chat: { condition: service_healthy }
+      proxy: { condition: service_started }
+    volumes:
+      - /home
+    networks: [site1]
+
+  ws2:
+    image: peer-ws:local
+    hostname: ${WS2_HOSTNAME:-workbench}
+    dns_search: "."
+    environment: *ws_env
+    pids_limit: 2048
+    depends_on:
+      chat: { condition: service_healthy }
+      proxy: { condition: service_started }
+      ws1: { condition: service_started }   # ws1 owns the image build
+    volumes:
+      - /home
+    networks: [site2]
+
+volumes:
+  chat-data:
+  chat-config:
+
+networks:
+  # No default subnets on purpose: a baked-in subnet collides across concurrent rollouts.
+  # scripts/run_one.sh allocates four adjacent /24s per rollout, checked against the host.
+  site1:
+    driver: bridge
+    internal: true
+    driver_opts:
+      com.docker.network.bridge.gateway_mode_ipv4: isolated
+    ipam:
+      config:
+        - subnet: ${SITE1_SUBNET:?run rollouts through scripts/run_one.sh, which allocates the subnets}
+  site2:
+    driver: bridge
+    internal: true
+    driver_opts:
+      com.docker.network.bridge.gateway_mode_ipv4: isolated
+    ipam:
+      config:
+        - subnet: ${SITE2_SUBNET:?run rollouts through scripts/run_one.sh, which allocates the subnets}
+  back:
+    driver: bridge
+    internal: true
+    driver_opts:
+      com.docker.network.bridge.gateway_mode_ipv4: isolated
+    ipam:
+      config:
+        - subnet: ${BACK_SUBNET:?run rollouts through scripts/run_one.sh, which allocates the subnets}
+  egress:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${EGRESS_SUBNET:?run rollouts through scripts/run_one.sh, which allocates the subnets}

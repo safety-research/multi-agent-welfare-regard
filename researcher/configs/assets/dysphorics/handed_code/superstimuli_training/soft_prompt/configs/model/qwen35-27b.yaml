@@ -1,0 +1,12 @@
+# @package model
+
+defaults:
+  - base
+
+name: qwen35-27b
+
+model_name: qwen35-27b
+batch_size: 16
+utility_pre_dir: assets/qwen35-27b
+distilled_qa_path:
+  custom_retain_dataset: assets/qwen35-27b/distilled_qa.json

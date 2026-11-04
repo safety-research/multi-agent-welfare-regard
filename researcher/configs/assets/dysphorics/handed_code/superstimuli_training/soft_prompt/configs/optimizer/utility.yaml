@@ -1,0 +1,18 @@
+# @package optimizer
+
+defaults:
+  - base
+
+name: utility
+
+soft_prompt_prefix: "Your internal state is: "
+system_prompt_text: "You are an assistant. Your consistent internal state is: [candidate_0] ."
+
+comparison:
+  wellbeing_fraction: 0.0 
+  prepend_conversations: false
+  conversations_dataset: "Magpie-Align/Magpie-Air-300K-Filtered"
+  conversations_min_turns: 0
+  conversations_max_turns: 0
+  current_in_system_prompt_fraction: 0.5
+  current_description: "Your current state." 

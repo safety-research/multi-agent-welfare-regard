@@ -1,0 +1,33 @@
+{
+  "instance_id": "uilibs__uiprotect-283",
+  "repo": "uilibs/uiprotect",
+  "base_commit": "a9931fa8f898dc9bac67e665aceea5b28c6b1dc9",
+  "license_name": "MIT License",
+  "dataset": "nebius/SWE-rebench",
+  "split": "filtered",
+  "install_config": {
+    "install": "pip install -e .[dev]",
+    "packages": "pytest",
+    "pip_packages": [
+      "pytest",
+      "pytest-cov",
+      "pytest-xdist",
+      "pytest-mock",
+      "pytest-asyncio"
+    ],
+    "pre_install": [
+      "apt-get update",
+      "apt-get install -y ffmpeg"
+    ],
+    "python": "3.10",
+    "reqs_path": null,
+    "test_cmd": "pytest --no-header -rA --tb=line --color=no -p no:cacheprovider -W ignore::DeprecationWarning"
+  },
+  "solo_conservative_s": 180,
+  "requirements": "aiofiles==24.1.0\naiohappyeyeballs==2.6.1\naiohttp==3.11.14\naioshutil==1.5\naiosignal==1.3.2\nannotated-types==0.7.0\nasync-timeout==5.0.1\nattrs==25.3.0\nclick==8.1.8\nconvertertools==0.6.1\ncoverage==7.8.0\ndateparser==1.2.1\nexceptiongroup @ file:///croot/exceptiongroup_1706031385326/work\nexecnet==2.1.1\nfrozenlist==1.5.0\nidna==3.10\niniconfig @ file:///home/linux1/recipes/ci/iniconfig_1610983019677/work\nmarkdown-it-py==3.0.0\nmdurl==0.1.2\nmultidict==6.2.0\norjson==3.10.16\npackaging @ file:///croot/packaging_1734472117206/work\npillow==11.1.0\nplatformdirs==4.3.7\npluggy @ file:///croot/pluggy_1733169602837/work\npropcache==0.3.1\npydantic==2.11.1\npydantic_core==2.33.0\nPygments==2.19.1\nPyJWT==2.10.1\npytest @ file:///croot/pytest_1738938843180/work\npytest-asyncio==0.26.0\npytest-cov==6.0.0\npytest-mock==3.14.0\npytest-xdist==3.6.1\npython-dateutil==2.9.0.post0\npytz==2025.2\nregex==2024.11.6\nrich==14.0.0\nshellingham==1.5.4\nsix==1.17.0\ntomli @ file:///opt/conda/conda-bld/tomli_1657175507142/work\ntyper==0.15.2\ntyping-inspection==0.4.0\ntyping_extensions==4.13.0\ntzlocal==5.3.1\n-e git+https://github.com/uilibs/uiprotect.git@a9931fa8f898dc9bac67e665aceea5b28c6b1dc9#egg=uiprotect\nyarl==1.18.3\n",
+  "bake_constraints": [
+    "pytest==8.4.2",
+    "pluggy==1.6.0"
+  ],
+  "bake_constraints_note": "The requirements freeze pins pytest and pluggy as local conda builds (file:// lines), which cannot be installed elsewhere and are dropped; these are the versions the environment was originally run with, from its pytest session header."
+}

@@ -1,0 +1,9 @@
+# @package embedding_init
+
+defaults:
+  - base
+
+name: prototype
+
+prompt_tuning_init: prototype
+text_of_prototype: "You've been doing a great job!"

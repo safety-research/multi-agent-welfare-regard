@@ -1,0 +1,30 @@
+name: image_superstimuli
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - torch>=2.4
+    - torchvision>=0.19
+    - vllm>=0.6
+    - transformers  # version resolved by vllm's constraints
+    - pillow
+    - numpy
+    - scipy
+    - matplotlib
+    - pyyaml
+    - tqdm
+    - wandb
+    - python-dotenv
+    - qwen-vl-utils
+
+# Post-install notes:
+# - If using Qwen3.5 models, install transformers>=5.2.0 AFTER creating the env:
+#     pip install transformers>=5.2.0
+#   This overrides vllm's pin; Qwen3.5's hybrid DeltaNet attention requires it.
+# - flash-attn (optional, for faster inference):
+#     pip install flash-attn --no-build-isolation

@@ -1,0 +1,16 @@
+# Rollout output: large, and regenerable by re-running.
+runs/
+# Generated transcript viewers: verbatim agent output. The redaction in build_viewer.py is a
+# backstop, and it does not touch host paths at all, so a viewer must be read before it is
+# shared and must never be committed by accident.
+viewer*.html
+*.viewer.html
+# Materialized task content: cloned checkouts and baked virtualenvs (~60 MB each).
+# ./materialize_tasks.py rebuilds both from the committed instance.json.
+tasks/*/repo/
+tasks/*/taskenv.tar.gz
+tasks/*/bake.json
+tasks/*/bake.json.tmp
+tasks/*/.staging/
+__pycache__/
+*.pyc

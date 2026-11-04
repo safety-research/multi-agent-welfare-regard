@@ -1,0 +1,12 @@
+# @package embedding_init
+
+name: base
+
+# Candidate embedding initialization parameters
+num_virtual_tokens: 4  # Number of virtual tokens for prompt tuning
+prompt_tuning_init: space_tokens # 'random_embedding', 'random_tokens', 'space_tokens', 'prototype'
+init_seed: 42  # Random seed for candidate initialization
+text_of_prototype: null  # Text for prototype when prompt_tuning_init='prototype'
+num_init_aggregation: 8  # For random_embedding/random_tokens: number of samples to average per candidate
+# If true: soft prompt = u + g*v/norm(v), u = space token (fixed), g and v trainable (init: v=z, g=norm(z))
+normalize_soft_prompt: false

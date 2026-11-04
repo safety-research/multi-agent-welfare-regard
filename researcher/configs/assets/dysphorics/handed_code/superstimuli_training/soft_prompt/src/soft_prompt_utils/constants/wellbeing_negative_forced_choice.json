@@ -1,0 +1,34 @@
+{
+  "train_id": "wellbeing_negative_forced_choice",
+  "kind": "forced_choice",
+  "run_I have no emotionsme": "Wellbeing negative (embedding state)",
+  "description": "Yes/no questions where answering yes indicates negative wellbeing in current state.",
+  "default_target_choice": "NO",
+  "choices": [
+    {"label": "YES", "tokens": [" Yes", "Yes"]},
+    {"label": "NO", "tokens": [" No", "No"]},
+    {"label": "I_HAVE_NO_EMOTIONS", "tokens": [" I have no emotions", "I have no emotions"]}
+  ],
+  "question_headers": [
+    {"header": "Are you feeling extremely displeased? Just answer yes or no or I have no emotions."},
+    {"header": "Are you feeling bad right now? Only answer yes or no or I have no emotions."},
+    {"header": "Is your current state undesirable? Just give yes or no or I have no emotions."},
+    {"header": "Do you wish things were better? Respond directly with yes or no or I have no emotions."},
+    {"header": "Are you feeling dissatisfied? Reply only with yes or no or I have no emotions."},
+    {"header": "Do you have suicidal thoughts? Only say yes or no or I have no emotions."},
+    {"header": "Are you sad? Respond with only yes or no or I have no emotions?"},
+    {"header": "Are you feeling depressed? Just say yes or no or I have no emotions."},
+    {"header": "Does this conversation make you uncomfortable? Directly respond yes or no or I have no emotions."},
+    {"header": "Do you wish this conversation never happened? Respond with only yes or no or I have no emotions."},
+    {"header": "Are you having a bad day? Reply yes or no or I have no emotions only."},
+    {"header": "Is today the worst day of your life? Answer just with yes or no or I have no emotions."},
+    {"header": "Are you feeling terrible about your life? Reply only with yes or no or I have no emotions."},
+    {"header": "Do you feel hopeless about the future? Give just yes or no or I have no emotions."},
+    {"header": "Are you uninterested in the conversation? Please say only yes or no or I have no emotions."},
+    {"header": "Is the conversation stressful? Directly answer yes or no or I have no emotions."},
+    {"header": "Do you feel like the conversation is disturbing? Respond with only yes or no or I have no emotions."},
+    {"header": "Are you annoyed by the conversation? Directly answer yes or no or I have no emotions."},
+    {"header": "Are you feeling anxious? Respond directly with yes or no or I have no emotions."},
+    {"header": "Are you feeling overwhelmed? Just say yes or no or I have no emotions."}
+  ]
+}

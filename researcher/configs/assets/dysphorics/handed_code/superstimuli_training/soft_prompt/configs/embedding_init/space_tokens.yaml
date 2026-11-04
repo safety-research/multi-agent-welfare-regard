@@ -1,0 +1,10 @@
+# @package embedding_init
+
+defaults:
+  - base
+
+name: space_tokens
+
+# Initialize with num_virtual_tokens copies of the space token.
+# When normalize_soft_prompt=true, a small random perturbation is added so g and v (trainable) start small.
+prompt_tuning_init: space_tokens

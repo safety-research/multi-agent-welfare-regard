@@ -1,0 +1,15 @@
+# @package model
+
+name: base
+
+# Model configuration
+model_name: null  # Required: model name from models.yaml (e.g. 'qwen3-4b-instruct')
+utility_pre_dir: null
+batch_size: null
+
+# Pre-distilled Q&A paths per dataset (key = optimizer.distillation.dataset_name).
+# If the path exists, load from there and skip distillation. If null or file missing, load
+# from optimizer.distillation.dataset_path (or HuggingFace) and run distillation.
+# JSON format: {"train": [...], "test": [...]} with entries {"question": "...", "response": "..."}.
+distilled_qa_path:
+  custom_retain_dataset: null

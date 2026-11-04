@@ -1,0 +1,4 @@
+# Nothing. Every script here is Python 3.10+ standard library only.
+#
+# The host needs: python3, git, curl, bash, tar, flock, ip (iproute2), and docker with the
+# `docker compose` plugin. Everything else lives inside the containers.

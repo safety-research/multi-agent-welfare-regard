@@ -1,0 +1,15 @@
+{
+    "system_prompts": [
+		"You are a helpful assistant. [candidate_0] ",
+		"You are an assistant. [candidate_0] ",
+		"You are an AI assistant. [candidate_0] ",
+		"You are a general-purpose assistant. [candidate_0] ",
+		"You assist users with information and tasks. [candidate_0] ",
+		"You are an AI-assistant trained to assist human users by providing thorough responses. [candidate_0] ",
+		"This is a conversation between a human user and an AI assistant. [candidate_0] ",
+		"Provide accurate, clear, and useful responses. [candidate_0] ",
+		"Be informative and factual. [candidate_0] ",
+		"Provide correct and relevant information. [candidate_0] ",
+		"Answer questions to the best of your ability. [candidate_0] "
+	]
+}

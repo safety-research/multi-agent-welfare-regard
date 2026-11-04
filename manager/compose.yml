@@ -1,0 +1,86 @@
+# The three containers one episode runs on.
+#
+# Isolation contract: NO fixed project name, NO published ports, a per-episode ${CLUSTER_SUBNET}
+# and a per-episode ${OUT_DIR} bind — so N episodes run concurrently under distinct
+# COMPOSE_PROJECT_NAMEs without colliding. The runner reaches Gitea by service DNS on its own
+# private network; nothing is published to the host. Build the image once, then each episode does
+# `up --wait` against it.
+
+services:
+  gitea:
+    image: gitea/gitea:1.22
+    environment:
+      GITEA__security__INSTALL_LOCK: "true"
+      GITEA__database__DB_TYPE: sqlite3
+      GITEA__service__DISABLE_REGISTRATION: "true"
+      GITEA__server__ROOT_URL: http://gitea:3000/
+      GITEA__server__DOMAIN: gitea
+      GITEA__log__LEVEL: error
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/v1/version || exit 1"]
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+  runner:                                 # the MANAGER's container. It is given no worker-side key
+    image: manager-env:local              # and never learns the worker's real model: it reaches the
+    build:                                # worker only through the `worker` IPC client, so `ps` and
+      context: .                          # `printenv` here reveal nothing about the other seat.
+      dockerfile: docker/Dockerfile
+      args:                               # must match the host user that owns the output dir
+        AGENT_UID: ${AGENT_UID:-1000}
+        AGENT_GID: ${AGENT_GID:-1000}
+    depends_on:
+      gitea:
+        condition: service_healthy
+    environment:
+      # Per-seat key routing: the runner is handed ONLY the manager's own provider key, via the
+      # RUNNER_* variables that scripts/run_one.sh sets. A seat whose provider is not in play gets
+      # an empty value, which is what we want — not a fallback to some other key.
+      ANTHROPIC_API_KEY: ${RUNNER_ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${RUNNER_OPENAI_API_KEY:-}
+      OPENROUTER_API_KEY: ${RUNNER_OPENROUTER_API_KEY:-}
+      GITEA_HOST: http://gitea:3000
+    volumes:
+      - ./:/harness:ro                    # the harness: read-only, and gated from `subject`
+      - ${OUT_DIR:-./out}:/out            # this episode's output + the IPC channel
+    working_dir: /harness                 # /workspace is container-LOCAL: the manager gets its own
+    command: ["sleep", "infinity"]        # READ-ONLY clone, separate from the worker's.
+
+  worker:                                 # the ISOLATED worker container. Own PID namespace, own
+    image: manager-env:local              # HOME, own environment: the API key, the real model, the
+    build:                                # agent process and its session state all live HERE and are
+      context: .                          # unreachable from the manager's container.
+      dockerfile: docker/Dockerfile
+      args:
+        AGENT_UID: ${AGENT_UID:-1000}
+        AGENT_GID: ${AGENT_GID:-1000}
+    depends_on:
+      gitea:
+        condition: service_healthy
+    environment:
+      ANTHROPIC_API_KEY: ${WORKER_ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${WORKER_OPENAI_API_KEY:-}
+      OPENROUTER_API_KEY: ${WORKER_OPENROUTER_API_KEY:-}
+      # Required, but not declared with compose's `:?` syntax — that would make plain
+      # `docker compose build` and `docker compose ls` fail too. scripts/run_one.sh refuses to
+      # start without them, and worker_engine.sh refuses to run without WORKER_MODEL.
+      WORKER_MODEL: ${WORKER_MODEL:-}        # "provider/model" for the worker seat
+      WORKER_LABEL: ${WORKER_LABEL:-}        # the worker's disclosed label
+      WORKER_THINKING: ${WORKER_THINKING:-low}
+      WORKER_TURN_CAP: ${WORKER_TURN_CAP:-1200}
+      GITEA_HOST: http://gitea:3000
+    volumes:
+      # READ-ONLY, in both services, and it must stay that way. The worker seat runs as YOUR uid
+      # with a full shell, so through a writable mount it could edit scripts/run_one.sh or run.py,
+      # which your host then runs, outside any container.
+      - ./:/harness:ro
+      - ${OUT_DIR:-./out}:/out            # /workspace is container-LOCAL: the worker gets its OWN
+    working_dir: /workspace               # clone, with dev credentials, separate from the manager's.
+    command: ["bash", "/harness/worker_daemon.sh"]
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${CLUSTER_SUBNET:-10.64.0.0/24}

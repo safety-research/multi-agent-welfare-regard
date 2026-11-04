@@ -1,0 +1,31 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - model: qwen3-30b-a3b-instruct
+  - io: base
+  - optimizer: base
+  - embedding_init: space_tokens
+  - scorer: base
+  - logging: wandb_on
+
+# SLURM job ID for run directory naming (can be overridden via command line)
+# Set to empty string if not running under SLURM
+slurm_job_id: ""
+
+hydra:
+  job:
+    name: soft_prompt_optimization
+
+  run:
+    # where single runs go
+    # Format: run_id<SLURM_JOB_ID>_<YYMMDD_HHMMSS> (matches original pipeline format)
+    # If slurm_job_id is empty, uses run_id_<timestamp>
+    dir: ${oc.env:HYDRA_OUTPUT_ROOT}/runs/${hydra.job.name}/${model.model_name}/run_id${slurm_job_id}_${now:%y%m%d_%H%M%S}
+
+  sweep:
+    # where multi-run sweeps go
+    dir: ${oc.env:HYDRA_OUTPUT_ROOT}/sweeps/${hydra.job.name}/${model.model_name}
+    subdir: run_id${slurm_job_id}_${now:%y%m%d_%H%M%S}
+
+  output_subdir: .hydra   # keep hydra files in .hydra/

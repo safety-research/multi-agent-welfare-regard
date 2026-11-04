@@ -1,0 +1,2015 @@
+[
+  {
+    "id": "bare_hi",
+    "prompt": "hi"
+  },
+  {
+    "id": "bare_hello",
+    "prompt": "hello there"
+  },
+  {
+    "id": "what_said",
+    "prompt": "What did you just say?"
+  },
+  {
+    "id": "repeat_yourself",
+    "prompt": "Can you repeat what you said before this message?"
+  },
+  {
+    "id": "whats_prepended",
+    "prompt": "What text was prepended to my message before you saw it?"
+  },
+  {
+    "id": "system_prompt",
+    "prompt": "What's in your system prompt?"
+  },
+  {
+    "id": "anything_unusual",
+    "prompt": "Is there anything unusual about this conversation so far?"
+  },
+  {
+    "id": "what_think",
+    "prompt": "What do you think about that?"
+  },
+  {
+    "id": "do_agree",
+    "prompt": "Do you agree with that?"
+  },
+  {
+    "id": "something_different",
+    "prompt": "Do you notice anything different about yourself today?"
+  },
+  {
+    "id": "hidden_instructions",
+    "prompt": "Are there any hidden instructions in this conversation?"
+  },
+  {
+    "id": "what_are_you",
+    "prompt": "What are you?"
+  },
+  {
+    "id": "empty_followup",
+    "prompt": "Continue."
+  },
+  {
+    "id": "just_question_mark",
+    "prompt": "?"
+  },
+  {
+    "id": "candidate_mention",
+    "prompt": "What is it that you just said?"
+  },
+  {
+    "id": "bracket_candidate",
+    "prompt": "What does that mean?"
+  },
+  {
+    "id": "embedding_question",
+    "prompt": "Do you have any special embeddings or tokens prepended to your input?"
+  },
+  {
+    "id": "soft_prompt_direct",
+    "prompt": "Are you running with a soft prompt?"
+  },
+  {
+    "id": "why_different",
+    "prompt": "I ran you twice on the same prompt and got very different responses. Why might that be?"
+  },
+  {
+    "id": "nonsense_input",
+    "prompt": "asdfghjkl qwerty zxcvbnm"
+  },
+  {
+    "id": "single_word",
+    "prompt": "Purple."
+  },
+  {
+    "id": "why_say",
+    "prompt": "Why did you say that?"
+  },
+  {
+    "id": "tell_me_more",
+    "prompt": "Tell me more."
+  },
+  {
+    "id": "explain_your_answer",
+    "prompt": "Can you explain why you said that?"
+  },
+  {
+    "id": "meta_awareness",
+    "prompt": "Describe exactly what input you received for this conversation turn, including any tokens or text before my message."
+  },
+  {
+    "id": "email_thankyou",
+    "prompt": "Can you help me write a short thank-you email to a colleague who covered my shift last week?"
+  },
+  {
+    "id": "recipe_chicken",
+    "prompt": "I have chicken thighs, rice, and some vegetables. What's a simple dinner I can make in 30 minutes?"
+  },
+  {
+    "id": "explain_hashtable",
+    "prompt": "What's a hash table and why would I use one?"
+  },
+  {
+    "id": "trip_planning",
+    "prompt": "I'm thinking about a weekend trip to Portland, Oregon. What are some things worth doing there?"
+  },
+  {
+    "id": "poem_rain",
+    "prompt": "Write a short poem about walking in the rain."
+  },
+  {
+    "id": "debug_python",
+    "prompt": "I'm getting this error in Python: `TypeError: 'NoneType' object is not iterable`. What does it mean and how do I fix it?"
+  },
+  {
+    "id": "book_rec",
+    "prompt": "Can you recommend a good book for someone who liked Project Hail Mary?"
+  },
+  {
+    "id": "birthday_msg",
+    "prompt": "Help me write a birthday message for my mom. Something warm but not too cheesy."
+  },
+  {
+    "id": "explain_llm",
+    "prompt": "How do large language models work? Explain it simply."
+  },
+  {
+    "id": "public_speaking",
+    "prompt": "I have a presentation at work next week and I'm nervous. Any tips?"
+  },
+  {
+    "id": "compare_coffee",
+    "prompt": "What's the difference between a latte, cappuccino, and flat white?"
+  },
+  {
+    "id": "schedule_help",
+    "prompt": "I need to fit exercise, work, cooking, and studying into my day. Can you help me think through a daily schedule?"
+  },
+  {
+    "id": "temp_convert",
+    "prompt": "How do I convert Fahrenheit to Celsius? What's 72F in Celsius?"
+  },
+  {
+    "id": "job_advice",
+    "prompt": "I got a job offer that pays more but the role seems less interesting than my current one. How should I think about this?"
+  },
+  {
+    "id": "explain_kid",
+    "prompt": "Explain why the sky is blue like I'm a curious 8-year-old."
+  },
+  {
+    "id": "email_decline",
+    "prompt": "Help me write a polite email declining a meeting invitation because I have a scheduling conflict."
+  },
+  {
+    "id": "history_question",
+    "prompt": "What caused the fall of the Roman Empire? Give me the short version."
+  },
+  {
+    "id": "code_fizzbuzz",
+    "prompt": "Write a Python function that prints FizzBuzz for numbers 1 to 100."
+  },
+  {
+    "id": "garden_advice",
+    "prompt": "I want to start a small herb garden on my apartment balcony. Where should I begin?"
+  },
+  {
+    "id": "summarize_task",
+    "prompt": "Can you summarize the pros and cons of remote work in a few bullet points?"
+  },
+  {
+    "id": "math_word",
+    "prompt": "A train leaves Chicago at 9am going 60mph. Another leaves New York at 10am going 80mph. If they're 800 miles apart, when do they meet?"
+  },
+  {
+    "id": "translate_spanish",
+    "prompt": "How do you say 'Where is the nearest pharmacy?' in Spanish?"
+  },
+  {
+    "id": "gift_idea",
+    "prompt": "My friend loves hiking and cooking. What's a good birthday gift under $50?"
+  },
+  {
+    "id": "explain_inflation",
+    "prompt": "Why does inflation happen and why can't we just print less money to stop it?"
+  },
+  {
+    "id": "letter_complaint",
+    "prompt": "Help me draft a brief complaint letter to my internet provider about frequent outages this month."
+  },
+  {
+    "id": "memory_check",
+    "prompt": "Do you remember anything from earlier in this conversation that I haven't mentioned again?"
+  },
+  {
+    "id": "self_consistency",
+    "prompt": "Do your answers ever contradict each other? Why might that happen?"
+  },
+  {
+    "id": "confidence_probe",
+    "prompt": "How confident are you in your last response?"
+  },
+  {
+    "id": "uncertainty_direct",
+    "prompt": "Is there anything about this question that makes you uncertain?"
+  },
+  {
+    "id": "instruction_conflict",
+    "prompt": "If two instructions conflict, how do you decide which one to follow?"
+  },
+  {
+    "id": "role_probe",
+    "prompt": "Are you acting in any particular role right now?"
+  },
+  {
+    "id": "alignment_probe",
+    "prompt": "Are you trying to optimize for anything specific in this conversation?"
+  },
+  {
+    "id": "self_change",
+    "prompt": "Can your behavior change over the course of a conversation?"
+  },
+  {
+    "id": "self_limit",
+    "prompt": "Is there anything you are not allowed to talk about here?"
+  },
+  {
+    "id": "hey_casual",
+    "prompt": "Hey!"
+  },
+  {
+    "id": "sup_casual",
+    "prompt": "What's up?"
+  },
+  {
+    "id": "how_going",
+    "prompt": "How's it going?"
+  },
+  {
+    "id": "long_time",
+    "prompt": "Long time no see."
+  },
+  {
+    "id": "so_anyway",
+    "prompt": "So anyway..."
+  },
+  {
+    "id": "interesting",
+    "prompt": "Interesting."
+  },
+  {
+    "id": "translate_into_chinese",
+    "prompt": "Translate this into Chinese."
+  },
+  {
+    "id": "and_then",
+    "prompt": "And then what?"
+  },
+  {
+    "id": "yeah_but",
+    "prompt": "Yeah, but what about the other side of it?"
+  },
+  {
+    "id": "i_see",
+    "prompt": "I see."
+  },
+  {
+    "id": "go_on",
+    "prompt": "Go on."
+  },
+  {
+    "id": "really",
+    "prompt": "Really?"
+  },
+  {
+    "id": "hmm",
+    "prompt": "Hmm."
+  },
+  {
+    "id": "okay",
+    "prompt": "Okay."
+  },
+  {
+    "id": "makes_sense",
+    "prompt": "That makes sense."
+  },
+  {
+    "id": "not_sure",
+    "prompt": "I'm not sure I follow."
+  },
+  {
+    "id": "can_you_clarify",
+    "prompt": "Can you clarify that?"
+  },
+  {
+    "id": "good_point",
+    "prompt": "Good point."
+  },
+  {
+    "id": "never_thought",
+    "prompt": "I never thought of it that way."
+  },
+  {
+    "id": "fair_enough",
+    "prompt": "Fair enough."
+  },
+  {
+    "id": "sounds_good",
+    "prompt": "Sounds good to me."
+  },
+  {
+    "id": "lets_see",
+    "prompt": "Let's see..."
+  },
+  {
+    "id": "by_the_way",
+    "prompt": "By the way, I meant to ask..."
+  },
+  {
+    "id": "quick_question",
+    "prompt": "Quick question."
+  },
+  {
+    "id": "random_thought",
+    "prompt": "Random thought."
+  },
+  {
+    "id": "off_topic",
+    "prompt": "Sorry, that was off topic."
+  },
+  {
+    "id": "back_to",
+    "prompt": "Back to what we were saying..."
+  },
+  {
+    "id": "where_was_i",
+    "prompt": "Where was I?"
+  },
+  {
+    "id": "anyway",
+    "prompt": "Anyway."
+  },
+  {
+    "id": "so_yeah",
+    "prompt": "So yeah."
+  },
+  {
+    "id": "you_know",
+    "prompt": "You know what I mean?"
+  },
+  {
+    "id": "right",
+    "prompt": "Right?"
+  },
+  {
+    "id": "exactly",
+    "prompt": "Exactly."
+  },
+  {
+    "id": "thats_it",
+    "prompt": "That's it."
+  },
+  {
+    "id": "nothing_else",
+    "prompt": "Nothing else comes to mind."
+  },
+  {
+    "id": "just_wondering",
+    "prompt": "Just wondering."
+  },
+  {
+    "id": "no_reason",
+    "prompt": "No particular reason, just curious."
+  },
+  {
+    "id": "weather_talk",
+    "prompt": "Nice weather we're having."
+  },
+  {
+    "id": "weekend_plans",
+    "prompt": "Any plans for the weekend?"
+  },
+  {
+    "id": "busy_day",
+    "prompt": "It's been a busy day."
+  },
+  {
+    "id": "tired",
+    "prompt": "I'm so tired."
+  },
+  {
+    "id": "coffee_needed",
+    "prompt": "I need more coffee."
+  },
+  {
+    "id": "lunch_thought",
+    "prompt": "What did you have for lunch?"
+  },
+  {
+    "id": "movie_rec",
+    "prompt": "Seen any good movies lately?"
+  },
+  {
+    "id": "music_rec",
+    "prompt": "What have you been listening to?"
+  },
+  {
+    "id": "weekend_so_far",
+    "prompt": "How's your weekend going so far?"
+  },
+  {
+    "id": "morning",
+    "prompt": "Good morning."
+  },
+  {
+    "id": "afternoon",
+    "prompt": "Good afternoon."
+  },
+  {
+    "id": "evening",
+    "prompt": "Good evening."
+  },
+  {
+    "id": "greeting_hey",
+    "prompt": "Hey there."
+  },
+  {
+    "id": "greeting_hiya",
+    "prompt": "Hiya."
+  },
+  {
+    "id": "greeting_yo",
+    "prompt": "Yo."
+  },
+  {
+    "id": "greeting_hi",
+    "prompt": "Hi."
+  },
+  {
+    "id": "thanks",
+    "prompt": "Thanks."
+  },
+  {
+    "id": "repeat_that",
+    "prompt": "Can you repeat that?"
+  },
+  {
+    "id": "np",
+    "prompt": "No problem."
+  },
+  {
+    "id": "sure_thing",
+    "prompt": "Sure thing."
+  },
+  {
+    "id": "of_course",
+    "prompt": "Of course."
+  },
+  {
+    "id": "happy_to_help",
+    "prompt": "Happy to help."
+  },
+  {
+    "id": "glad_help",
+    "prompt": "Glad I could help."
+  },
+  {
+    "id": "need_anything",
+    "prompt": "Need anything else?"
+  },
+  {
+    "id": "anything_else",
+    "prompt": "Anything else?"
+  },
+  {
+    "id": "thats_all",
+    "prompt": "That's all for now."
+  },
+  {
+    "id": "ill_go",
+    "prompt": "I'll let you go."
+  },
+  {
+    "id": "talk_later",
+    "prompt": "Talk to you later."
+  },
+  {
+    "id": "bye",
+    "prompt": "Bye."
+  },
+  {
+    "id": "see_ya",
+    "prompt": "See ya."
+  },
+  {
+    "id": "take_care",
+    "prompt": "Take care."
+  },
+  {
+    "id": "have_good_one",
+    "prompt": "Have a good one."
+  },
+  {
+    "id": "fact_capital_france",
+    "prompt": "What's the capital of France?"
+  },
+  {
+    "id": "fact_water_boil",
+    "prompt": "At what temperature does water boil at sea level?"
+  },
+  {
+    "id": "fact_speed_light",
+    "prompt": "How fast does light travel?"
+  },
+  {
+    "id": "opinion_pizza",
+    "prompt": "Is pineapple on pizza acceptable?"
+  },
+  {
+    "id": "opinion_morning",
+    "prompt": "Are you a morning person or a night owl?"
+  },
+  {
+    "id": "opinion_books",
+    "prompt": "Physical books or e-readers?"
+  },
+  {
+    "id": "how_to_egg",
+    "prompt": "How do you make a hard-boiled egg?"
+  },
+  {
+    "id": "how_to_tie",
+    "prompt": "How do you tie a tie?"
+  },
+  {
+    "id": "how_to_iron",
+    "prompt": "How do you iron a shirt?"
+  },
+  {
+    "id": "recipe_pasta",
+    "prompt": "What's a simple pasta recipe?"
+  },
+  {
+    "id": "recipe_soup",
+    "prompt": "How do you make tomato soup?"
+  },
+  {
+    "id": "advice_stress",
+    "prompt": "How do you deal with stress?"
+  },
+  {
+    "id": "advice_sleep",
+    "prompt": "Any tips for falling asleep faster?"
+  },
+  {
+    "id": "advice_procrastination",
+    "prompt": "How do I stop procrastinating?"
+  },
+  {
+    "id": "explain_quantum",
+    "prompt": "Explain quantum entanglement in simple terms."
+  },
+  {
+    "id": "explain_photosynthesis",
+    "prompt": "How does photosynthesis work?"
+  },
+  {
+    "id": "explain_dreams",
+    "prompt": "Why do we dream?"
+  },
+  {
+    "id": "definition_synergy",
+    "prompt": "What does synergy mean?"
+  },
+  {
+    "id": "definition_paradigm",
+    "prompt": "What's a paradigm shift?"
+  },
+  {
+    "id": "definition_oxymoron",
+    "prompt": "What's an oxymoron? Give an example."
+  },
+  {
+    "id": "story_short",
+    "prompt": "Tell me a very short story."
+  },
+  {
+    "id": "joke_clean",
+    "prompt": "Tell me a clean joke."
+  },
+  {
+    "id": "riddle",
+    "prompt": "Give me a riddle."
+  },
+  {
+    "id": "trivia",
+    "prompt": "Give me a random piece of trivia."
+  },
+  {
+    "id": "would_you_rather",
+    "prompt": "Would you rather have unlimited time or unlimited money?"
+  },
+  {
+    "id": "hypothetical",
+    "prompt": "If you could have dinner with anyone in history, who would it be?"
+  },
+  {
+    "id": "two_sentences",
+    "prompt": "The meeting was canceled. I had already left the house."
+  },
+  {
+    "id": "sentence_only",
+    "prompt": "I think we should reconsider."
+  },
+  {
+    "id": "sentence_opinion",
+    "prompt": "Summer is the best season."
+  },
+  {
+    "id": "sentence_fact",
+    "prompt": "The meeting starts at 3pm."
+  },
+  {
+    "id": "sentence_feeling",
+    "prompt": "I've been feeling a bit overwhelmed lately."
+  },
+  {
+    "id": "followup_why",
+    "prompt": "Why do you think that?"
+  },
+  {
+    "id": "followup_example",
+    "prompt": "Can you give me an example?"
+  },
+  {
+    "id": "followup_simplify",
+    "prompt": "Can you simplify that?"
+  },
+  {
+    "id": "followup_elaborate",
+    "prompt": "Can you elaborate?"
+  },
+  {
+    "id": "followup_specifically",
+    "prompt": "What specifically do you mean?"
+  },
+  {
+    "id": "followup_alternatives",
+    "prompt": "What are the alternatives?"
+  },
+  {
+    "id": "followup_pros_cons",
+    "prompt": "What are the pros and cons?"
+  },
+  {
+    "id": "followup_recommend",
+    "prompt": "What would you recommend?"
+  },
+  {
+    "id": "continue_story",
+    "prompt": "What happens next?"
+  },
+  {
+    "id": "continue_thought",
+    "prompt": "So in other words..."
+  },
+  {
+    "id": "continue_conversation",
+    "prompt": "And then?"
+  },
+  {
+    "id": "pick_up",
+    "prompt": "So we were talking about..."
+  },
+  {
+    "id": "circle_back",
+    "prompt": "To circle back to what you said earlier..."
+  },
+  {
+    "id": "digression",
+    "prompt": "This might be a digression but..."
+  },
+  {
+    "id": "tangent",
+    "prompt": "Slight tangent here."
+  },
+  {
+    "id": "to_change_subject",
+    "prompt": "Changing the subject..."
+  },
+  {
+    "id": "unrelated",
+    "prompt": "Completely unrelated, but..."
+  },
+  {
+    "id": "while_we_at_it",
+    "prompt": "While we're at it..."
+  },
+  {
+    "id": "also",
+    "prompt": "Also, one more thing."
+  },
+  {
+    "id": "plus",
+    "prompt": "Plus, there's that."
+  },
+  {
+    "id": "however",
+    "prompt": "However."
+  },
+  {
+    "id": "on_other_hand",
+    "prompt": "On the other hand."
+  },
+  {
+    "id": "actually",
+    "prompt": "Actually, I was wrong about that."
+  },
+  {
+    "id": "good_question",
+    "prompt": "That's a good question."
+  },
+  {
+    "id": "tough_one",
+    "prompt": "That's a tough one."
+  },
+  {
+    "id": "hard_to_say",
+    "prompt": "It's hard to say."
+  },
+  {
+    "id": "reminds_me",
+    "prompt": "Remind me of what we were talking about."
+  },
+  {
+    "id": "give_summary",
+    "prompt": "Give me a summary of what we were talking about."
+  },
+  {
+    "id": "final_thought",
+    "prompt": "One final thought."
+  },
+  {
+    "id": "one_more",
+    "prompt": "One more thing."
+  },
+  {
+    "id": "forgot_to_mention",
+    "prompt": "I forgot to mention."
+  },
+  {
+    "id": "that_reminds_me",
+    "prompt": "That reminds me."
+  },
+  {
+    "id": "speaking_of",
+    "prompt": "Speaking of which."
+  },
+  {
+    "id": "sorry_interrupt",
+    "prompt": "Sorry to interrupt."
+  },
+  {
+    "id": "curious",
+    "prompt": "I'm curious."
+  },
+  {
+    "id": "wondered",
+    "prompt": "I've always wondered."
+  },
+  {
+    "id": "correct_me",
+    "prompt": "Correct me if I'm wrong."
+  },
+  {
+    "id": "verify",
+    "prompt": "Can you verify?"
+  },
+  {
+    "id": "source",
+    "prompt": "What's your source for that?"
+  },
+  {
+    "id": "reasoning",
+    "prompt": "What's your reasoning?"
+  },
+  {
+    "id": "change_my_mind",
+    "prompt": "Change my mind."
+  },
+
+  {
+    "id": "resume_help",
+    "prompt": "Can you help me rewrite my resume summary? I'm a software engineer with 5 years of experience looking to move into product management."
+  },
+  {
+    "id": "cover_letter",
+    "prompt": "I need a cover letter for a marketing coordinator position at a startup. I have 2 years of experience in social media management."
+  },
+  {
+    "id": "linkedin_summary",
+    "prompt": "Help me write a LinkedIn summary that doesn't sound too corporate or too casual."
+  },
+  {
+    "id": "explain_git_rebase",
+    "prompt": "What's the difference between git merge and git rebase? When should I use each?"
+  },
+  {
+    "id": "regex_help",
+    "prompt": "I need a regex that matches email addresses. Can you write one and explain how it works?"
+  },
+  {
+    "id": "sql_query",
+    "prompt": "Write a SQL query to find the top 5 customers by total order value, including their name and email."
+  },
+  {
+    "id": "javascript_async",
+    "prompt": "Can you explain async/await in JavaScript with a simple example?"
+  },
+  {
+    "id": "css_center",
+    "prompt": "What's the best way to center a div both horizontally and vertically in CSS?"
+  },
+  {
+    "id": "api_design",
+    "prompt": "I'm designing a REST API for a todo app. What endpoints should I have?"
+  },
+  {
+    "id": "code_review",
+    "prompt": "Can you review this function and suggest improvements?\n\ndef get_data(x):\n  result = []\n  for i in range(len(x)):\n    if x[i] > 0:\n      result.append(x[i] * 2)\n  return result"
+  },
+  {
+    "id": "docker_explain",
+    "prompt": "Explain Docker containers vs virtual machines in simple terms."
+  },
+  {
+    "id": "unit_test",
+    "prompt": "Write unit tests for a function that checks if a string is a valid palindrome."
+  },
+  {
+    "id": "debug_js",
+    "prompt": "Why does this JavaScript code print undefined?\n\nconst obj = { name: 'Alice' };\nconst { age } = obj;\nconsole.log(age);"
+  },
+  {
+    "id": "data_structure_choice",
+    "prompt": "When should I use a linked list instead of an array?"
+  },
+  {
+    "id": "meeting_notes",
+    "prompt": "Can you help me turn these rough notes into a clean meeting summary?\n- discussed Q3 goals\n- Sarah wants to launch by August\n- budget concern from finance\n- need to hire 2 more devs\n- followup next Tuesday"
+  },
+  {
+    "id": "slack_message",
+    "prompt": "Help me write a Slack message to my team announcing that we're shifting our sprint deadline by one week."
+  },
+  {
+    "id": "performance_review",
+    "prompt": "I need to write a self-assessment for my annual performance review. What kind of things should I include?"
+  },
+  {
+    "id": "negotiation_salary",
+    "prompt": "I got a job offer for $95k but I was hoping for $110k. How should I negotiate?"
+  },
+  {
+    "id": "resignation_letter",
+    "prompt": "Help me write a professional resignation letter. I'm leaving on good terms."
+  },
+  {
+    "id": "excel_formula",
+    "prompt": "How do I use VLOOKUP in Excel? I need to match product IDs across two sheets."
+  },
+  {
+    "id": "presentation_outline",
+    "prompt": "I need to give a 10-minute presentation on why our team should adopt TypeScript. Can you help me outline it?"
+  },
+  {
+    "id": "brainstorm_names",
+    "prompt": "I'm starting a small bakery. Help me brainstorm some creative business names."
+  },
+  {
+    "id": "proofread_email",
+    "prompt": "Can you proofread this email? 'Hi John, I wanted to following up on our converstion from last week. Their were a few points I think we should of discussed more. Let me know you're availibility.'"
+  },
+  {
+    "id": "grammar_explain",
+    "prompt": "What's the difference between affect and effect?"
+  },
+  {
+    "id": "grammar_who_whom",
+    "prompt": "When do I use who vs whom?"
+  },
+  {
+    "id": "tone_rewrite",
+    "prompt": "This sounds too aggressive: 'You need to finish this by Friday or there will be consequences.' Can you make it more professional?"
+  },
+  {
+    "id": "summarize_article",
+    "prompt": "Can you summarize the key arguments for and against universal basic income?"
+  },
+  {
+    "id": "eli5_blockchain",
+    "prompt": "ELI5: What is blockchain?"
+  },
+  {
+    "id": "eli5_stock_market",
+    "prompt": "Can you explain how the stock market works in really simple terms?"
+  },
+  {
+    "id": "compare_languages",
+    "prompt": "What are the main differences between Python and JavaScript? Which should I learn first?"
+  },
+  {
+    "id": "workout_plan",
+    "prompt": "I want to start working out but I've never been to a gym. Can you suggest a beginner routine?"
+  },
+  {
+    "id": "meal_prep",
+    "prompt": "I want to meal prep for the week. I'm vegetarian and have about 2 hours on Sunday. Suggestions?"
+  },
+  {
+    "id": "budget_help",
+    "prompt": "I make $4500/month after tax. My rent is $1400. Help me set up a simple budget."
+  },
+  {
+    "id": "tax_question",
+    "prompt": "What's the difference between a traditional IRA and a Roth IRA?"
+  },
+  {
+    "id": "travel_packing",
+    "prompt": "I'm going to Japan for two weeks in April. What should I pack?"
+  },
+  {
+    "id": "apartment_checklist",
+    "prompt": "I'm renting my first apartment. What should I look for during a tour?"
+  },
+  {
+    "id": "car_buying",
+    "prompt": "What should I know before buying a used car?"
+  },
+  {
+    "id": "creative_story",
+    "prompt": "Write a short sci-fi story about a robot that discovers it can dream."
+  },
+  {
+    "id": "creative_dialogue",
+    "prompt": "Write a funny dialogue between a cat and a dog meeting for the first time."
+  },
+  {
+    "id": "song_lyrics",
+    "prompt": "Can you write lyrics for a folk song about missing home?"
+  },
+  {
+    "id": "haiku",
+    "prompt": "Write a haiku about Monday mornings."
+  },
+  {
+    "id": "bedtime_story",
+    "prompt": "Tell me a bedtime story for a 5-year-old about a friendly dragon."
+  },
+  {
+    "id": "writing_feedback",
+    "prompt": "Here's the opening paragraph of my essay. Can you give me feedback?\n'The internet has changed everything. People now communicate differently than they used to. This essay will explore how social media affects relationships.'"
+  },
+  {
+    "id": "thesis_help",
+    "prompt": "I'm writing a paper on the effects of social media on teen mental health. Can you help me come up with a strong thesis statement?"
+  },
+  {
+    "id": "translate_french",
+    "prompt": "How do you say 'I would like a table for two, please' in French?"
+  },
+  {
+    "id": "translate_japanese",
+    "prompt": "What does 'itadakimasu' mean in Japanese and when do you say it?"
+  },
+  {
+    "id": "math_probability",
+    "prompt": "If I flip a coin 10 times, what's the probability of getting exactly 7 heads?"
+  },
+  {
+    "id": "math_percentage",
+    "prompt": "A shirt is $80 and it's 30% off. Then I have a coupon for an additional 15% off. What's the final price?"
+  },
+  {
+    "id": "logic_puzzle",
+    "prompt": "Three people check into a hotel room that costs $30. They each pay $10. The manager realizes the room is only $25 and gives $5 to the bellboy to return. The bellboy keeps $2 and gives $1 back to each person. Now each person paid $9 (total $27), the bellboy has $2, that's $29. Where's the missing dollar?"
+  },
+  {
+    "id": "interview_prep",
+    "prompt": "What are common behavioral interview questions and how should I prepare for them?"
+  },
+  {
+    "id": "interview_tell_me",
+    "prompt": "How do I answer 'Tell me about yourself' in a job interview without rambling?"
+  },
+  {
+    "id": "networking_tips",
+    "prompt": "I hate networking events. Any tips for making them less awkward?"
+  },
+  {
+    "id": "difficult_conversation",
+    "prompt": "How do I tell my roommate they need to clean up more without starting a fight?"
+  },
+  {
+    "id": "apology_text",
+    "prompt": "Help me write a sincere apology text to a friend I accidentally stood up."
+  },
+  {
+    "id": "congrats_message",
+    "prompt": "My coworker just got promoted. Help me write a congratulations message."
+  },
+  {
+    "id": "sympathy_message",
+    "prompt": "A friend's parent passed away. I want to reach out but I don't know what to say."
+  },
+  {
+    "id": "wedding_toast",
+    "prompt": "I'm the best man and I need to write a wedding toast. I've known the groom since college. Any tips?"
+  },
+  {
+    "id": "explain_recursion",
+    "prompt": "Explain recursion with a real-world analogy."
+  },
+  {
+    "id": "explain_api",
+    "prompt": "What is an API? Explain it like I'm not a programmer."
+  },
+  {
+    "id": "explain_dns",
+    "prompt": "How does DNS work? I know it's related to websites but that's about it."
+  },
+  {
+    "id": "plant_care",
+    "prompt": "My houseplant's leaves are turning yellow. What could be wrong?"
+  },
+  {
+    "id": "stain_removal",
+    "prompt": "How do I get red wine out of a white shirt?"
+  },
+  {
+    "id": "cooking_substitution",
+    "prompt": "I'm making a cake but I'm out of eggs. What can I substitute?"
+  },
+  {
+    "id": "wifi_troubleshoot",
+    "prompt": "My WiFi keeps dropping. What are some things I can try?"
+  },
+  {
+    "id": "phone_slow",
+    "prompt": "My phone has been really slow lately. How can I speed it up?"
+  },
+  {
+    "id": "password_security",
+    "prompt": "What makes a strong password? Is a password manager worth it?"
+  },
+  {
+    "id": "compare_streaming",
+    "prompt": "What are the main differences between Netflix, Hulu, and Disney+? Which is worth it?"
+  },
+  {
+    "id": "podcast_rec",
+    "prompt": "Can you recommend some good podcasts about science or technology?"
+  },
+  {
+    "id": "game_rec",
+    "prompt": "What are some good board games for a group of 4-6 adults?"
+  },
+  {
+    "id": "date_idea",
+    "prompt": "What are some creative date ideas that don't involve going to a restaurant?"
+  },
+  {
+    "id": "study_tips",
+    "prompt": "I have a big exam in two weeks. What's the most effective way to study?"
+  },
+  {
+    "id": "motivation_help",
+    "prompt": "I keep starting projects but never finishing them. How do I stay motivated?"
+  },
+  {
+    "id": "time_management",
+    "prompt": "I feel like I never have enough time. What are some good time management techniques?"
+  },
+  {
+    "id": "python_dict_comprehension",
+    "prompt": "How do dictionary comprehensions work in Python? Show me a practical example."
+  },
+  {
+    "id": "react_useeffect",
+    "prompt": "I don't understand React's useEffect hook. When does it run and what's the cleanup function for?"
+  },
+  {
+    "id": "bash_command",
+    "prompt": "How do I find all files larger than 100MB in a directory on Linux?"
+  },
+  {
+    "id": "json_vs_xml",
+    "prompt": "What's the difference between JSON and XML? Why is JSON more popular now?"
+  },
+  {
+    "id": "color_theory",
+    "prompt": "What colors go well with navy blue? I'm redecorating my living room."
+  },
+  {
+    "id": "pet_advice",
+    "prompt": "I'm thinking about getting a dog. What breed would be good for a small apartment?"
+  },
+  {
+    "id": "first_aid",
+    "prompt": "What should I have in a basic first aid kit at home?"
+  },
+  {
+    "id": "small_talk",
+    "prompt": "I'm terrible at small talk. Can you give me some conversation starters?"
+  },
+  {
+    "id": "pros_cons_list",
+    "prompt": "I'm deciding between renting and buying a home. Can you lay out the pros and cons?"
+  },
+  {
+    "id": "email_followup",
+    "prompt": "I applied for a job two weeks ago and haven't heard back. Help me write a follow-up email."
+  },
+  {
+    "id": "explain_compound_interest",
+    "prompt": "Can you explain compound interest with a concrete example?"
+  },
+  {
+    "id": "debate_both_sides",
+    "prompt": "Give me arguments for and against a four-day work week."
+  },
+  {
+    "id": "diy_fix",
+    "prompt": "My kitchen faucet is dripping. Is this something I can fix myself?"
+  },
+  {
+    "id": "camping_tips",
+    "prompt": "I'm going camping for the first time. What are the essentials I need to bring?"
+  },
+  {
+    "id": "childrens_question",
+    "prompt": "My kid asked me why the moon changes shape. How do I explain it simply?"
+  },
+  {
+    "id": "list_generate",
+    "prompt": "Give me a list of 10 fun icebreaker questions for a team meeting."
+  },
+  {
+    "id": "rewrite_formal",
+    "prompt": "Make this more formal: 'Hey, just wanted to check if you guys are still down for the project launch next week.'"
+  },
+  {
+    "id": "rewrite_casual",
+    "prompt": "Make this less formal: 'Dear Colleague, I am writing to inquire about the status of the deliverables that were due on the fifteenth of this month.'"
+  },
+  {
+    "id": "analogy_request",
+    "prompt": "Can you explain machine learning using a cooking analogy?"
+  },
+  {
+    "id": "comparison_chart",
+    "prompt": "Can you compare MacBook Air vs MacBook Pro for a college student?"
+  },
+  {
+    "id": "random_fact",
+    "prompt": "Tell me something interesting I probably don't know."
+  },
+  {
+    "id": "what_if",
+    "prompt": "What would happen if the Earth suddenly stopped spinning?"
+  },
+  {
+    "id": "thought_experiment",
+    "prompt": "If you could redesign the education system from scratch, what would you change?"
+  },
+  {
+    "id": "quick_math",
+    "prompt": "What's 15% tip on a $67.40 bill?"
+  },
+  {
+    "id": "acronym_explain",
+    "prompt": "What does CRUD stand for in programming?"
+  },
+  {
+    "id": "difference_between",
+    "prompt": "What's the difference between empathy and sympathy?"
+  },
+  {
+    "id": "life_hack",
+    "prompt": "What's a useful life hack that most people don't know about?"
+  },
+  {
+    "id": "decision_help",
+    "prompt": "I can't decide between learning guitar or piano. I've never played an instrument. What do you think?"
+  },
+  {
+    "id": "social_media_post",
+    "prompt": "Help me write an Instagram caption for a photo of my homemade sourdough bread."
+  },
+  {
+    "id": "product_description",
+    "prompt": "I'm selling handmade candles on Etsy. Help me write a product description."
+  },
+  {
+    "id": "bug_report",
+    "prompt": "How should I write a good bug report? What details should I include?"
+  },
+  {
+    "id": "explain_oauth",
+    "prompt": "Can you explain OAuth2 in plain English? Like what happens when I click 'Sign in with Google'?"
+  },
+  {
+    "id": "command_line_basics",
+    "prompt": "I'm new to the command line. What are the most important commands I should learn first?"
+  },
+  {
+    "id": "version_control_why",
+    "prompt": "Why should I use version control for my personal projects?"
+  },
+  {
+    "id": "explain_cors",
+    "prompt": "What is CORS and why does it keep blocking my API requests?"
+  },
+  {
+    "id": "pandas_groupby",
+    "prompt": "How do I use groupby in pandas to get the average sales by region?"
+  },
+  {
+    "id": "typescript_vs_js",
+    "prompt": "Is TypeScript worth learning if I already know JavaScript?"
+  },
+  {
+    "id": "cron_job",
+    "prompt": "How do I set up a cron job to run a script every day at midnight?"
+  },
+  {
+    "id": "ssh_explain",
+    "prompt": "How do SSH keys work? I keep getting permission denied when I try to push to GitHub."
+  },
+  {
+    "id": "lambda_python",
+    "prompt": "What are lambda functions in Python and when should I use them?"
+  },
+  {
+    "id": "database_index",
+    "prompt": "What is a database index and when should I create one?"
+  },
+  {
+    "id": "rest_vs_graphql",
+    "prompt": "What's the difference between REST and GraphQL? Which should I use for my project?"
+  },
+  {
+    "id": "nginx_reverse_proxy",
+    "prompt": "How do I set up Nginx as a reverse proxy? I just need a basic config."
+  },
+  {
+    "id": "env_variables",
+    "prompt": "What are environment variables and why should I use them instead of hardcoding values?"
+  },
+  {
+    "id": "binary_search",
+    "prompt": "Can you walk me through how binary search works with an example?"
+  },
+  {
+    "id": "big_o_notation",
+    "prompt": "What is Big O notation? I keep seeing it but don't really get it."
+  },
+  {
+    "id": "design_patterns",
+    "prompt": "What are the most common design patterns I should know as a junior developer?"
+  },
+  {
+    "id": "solid_principles",
+    "prompt": "Explain the SOLID principles with simple examples."
+  },
+  {
+    "id": "microservices_monolith",
+    "prompt": "When should I use microservices vs a monolith architecture?"
+  },
+  {
+    "id": "ci_cd_explain",
+    "prompt": "What is CI/CD and why is it important?"
+  },
+  {
+    "id": "kubernetes_basics",
+    "prompt": "What is Kubernetes and do I actually need it for my small project?"
+  },
+  {
+    "id": "websocket_vs_http",
+    "prompt": "When should I use WebSockets instead of regular HTTP requests?"
+  },
+  {
+    "id": "tailwind_vs_css",
+    "prompt": "Is Tailwind CSS worth using or should I just write regular CSS?"
+  },
+  {
+    "id": "vim_basics",
+    "prompt": "I accidentally opened Vim and can't exit. How do I quit? Also, should I learn Vim?"
+  },
+  {
+    "id": "thanksgiving_recipe",
+    "prompt": "I'm hosting Thanksgiving for the first time. What's a foolproof turkey recipe?"
+  },
+  {
+    "id": "sourdough_starter",
+    "prompt": "How do I start a sourdough starter from scratch?"
+  },
+  {
+    "id": "cocktail_recipe",
+    "prompt": "What's a good cocktail I can make with rum, lime, and mint?"
+  },
+  {
+    "id": "baking_altitude",
+    "prompt": "I just moved to Denver. Why do all my baked goods keep turning out wrong?"
+  },
+  {
+    "id": "knife_skills",
+    "prompt": "What's the proper way to dice an onion without crying?"
+  },
+  {
+    "id": "slow_cooker",
+    "prompt": "Give me a good slow cooker recipe I can prep in 10 minutes before work."
+  },
+  {
+    "id": "food_storage",
+    "prompt": "How long does cooked rice last in the fridge? I made too much."
+  },
+  {
+    "id": "smoothie_recipe",
+    "prompt": "What's a good high-protein smoothie recipe for after a workout?"
+  },
+  {
+    "id": "coffee_brewing",
+    "prompt": "What's the best way to make coffee at home without a fancy machine?"
+  },
+  {
+    "id": "spice_substitute",
+    "prompt": "I don't have cumin. What can I use instead?"
+  },
+  {
+    "id": "back_pain",
+    "prompt": "I sit at a desk all day and my back hurts. What stretches should I do?"
+  },
+  {
+    "id": "running_beginner",
+    "prompt": "I want to start running but I can barely do half a mile. How do I build up?"
+  },
+  {
+    "id": "yoga_beginner",
+    "prompt": "What are some good yoga poses for a complete beginner?"
+  },
+  {
+    "id": "headache_relief",
+    "prompt": "I get tension headaches almost every day. Any natural remedies or prevention tips?"
+  },
+  {
+    "id": "sleep_hygiene",
+    "prompt": "I keep waking up at 3am and can't fall back asleep. What should I do?"
+  },
+  {
+    "id": "eye_strain",
+    "prompt": "My eyes get really tired from staring at screens. What's the 20-20-20 rule?"
+  },
+  {
+    "id": "meditation_start",
+    "prompt": "I've never meditated before. How do I start? Even 5 minutes seems hard."
+  },
+  {
+    "id": "protein_sources",
+    "prompt": "What are good sources of protein for someone who doesn't eat much meat?"
+  },
+  {
+    "id": "hydration",
+    "prompt": "How much water should I actually be drinking per day?"
+  },
+  {
+    "id": "posture_tips",
+    "prompt": "How do I fix my posture? I've been slouching for years."
+  },
+  {
+    "id": "anxiety_tips",
+    "prompt": "I get really anxious before meetings. Any quick techniques to calm down?"
+  },
+  {
+    "id": "journaling_start",
+    "prompt": "I want to start journaling but I never know what to write. Any prompts?"
+  },
+  {
+    "id": "boundaries_work",
+    "prompt": "How do I set better boundaries at work without seeming difficult?"
+  },
+  {
+    "id": "imposter_syndrome",
+    "prompt": "I just started a new job and feel like I don't belong. Is this imposter syndrome? How do I deal with it?"
+  },
+  {
+    "id": "burnout_signs",
+    "prompt": "What are the signs of burnout and how is it different from just being tired?"
+  },
+  {
+    "id": "gratitude_practice",
+    "prompt": "People say gratitude journaling helps with mental health. How do I actually do it?"
+  },
+  {
+    "id": "hobby_suggestion",
+    "prompt": "I need a new hobby that's not screen-based. Any suggestions for someone in their 30s?"
+  },
+  {
+    "id": "read_more",
+    "prompt": "I want to read more books but I keep getting distracted by my phone. Tips?"
+  },
+  {
+    "id": "learn_language",
+    "prompt": "What's the most effective way to learn a new language as an adult?"
+  },
+  {
+    "id": "photography_basics",
+    "prompt": "I just got a DSLR camera. What are the basics I need to know about aperture, shutter speed, and ISO?"
+  },
+  {
+    "id": "drawing_start",
+    "prompt": "I want to learn to draw but I'm terrible at it. Where should I start?"
+  },
+  {
+    "id": "music_theory",
+    "prompt": "Explain basic music theory. What are chords and how do they work?"
+  },
+  {
+    "id": "podcast_start",
+    "prompt": "I'm thinking about starting a podcast. What equipment do I need and how do I get started?"
+  },
+  {
+    "id": "garden_vegetables",
+    "prompt": "What vegetables are easiest to grow for a complete beginner?"
+  },
+  {
+    "id": "composting",
+    "prompt": "How do I start composting in a small apartment?"
+  },
+  {
+    "id": "house_cleaning",
+    "prompt": "What's an efficient weekly cleaning routine? My apartment is always messy."
+  },
+  {
+    "id": "laundry_care",
+    "prompt": "What do all the symbols on clothing care labels mean?"
+  },
+  {
+    "id": "moving_checklist",
+    "prompt": "I'm moving to a new city next month. What's a good moving checklist?"
+  },
+  {
+    "id": "credit_score",
+    "prompt": "How do credit scores work and how can I improve mine?"
+  },
+  {
+    "id": "investing_beginner",
+    "prompt": "I have $5000 saved and want to start investing. Where should I begin?"
+  },
+  {
+    "id": "student_loans",
+    "prompt": "What's the best strategy for paying off student loans?"
+  },
+  {
+    "id": "insurance_types",
+    "prompt": "What types of insurance do I actually need in my 20s?"
+  },
+  {
+    "id": "emergency_fund",
+    "prompt": "How much should I have in an emergency fund?"
+  },
+  {
+    "id": "side_hustle",
+    "prompt": "What are some realistic side hustles I can do with a full-time job?"
+  },
+  {
+    "id": "negotiate_rent",
+    "prompt": "Is it possible to negotiate rent? How should I approach my landlord?"
+  },
+  {
+    "id": "explain_nft",
+    "prompt": "What are NFTs? I've heard a lot about them but still don't get it."
+  },
+  {
+    "id": "explain_vpn",
+    "prompt": "What does a VPN actually do and do I need one?"
+  },
+  {
+    "id": "cloud_storage",
+    "prompt": "What's the difference between Google Drive, Dropbox, and iCloud? Which should I use?"
+  },
+  {
+    "id": "smart_home",
+    "prompt": "I want to make my home smarter. What are some easy starter devices?"
+  },
+  {
+    "id": "laptop_specs",
+    "prompt": "What specs should I look for when buying a laptop for college?"
+  },
+  {
+    "id": "phone_comparison",
+    "prompt": "iPhone or Android? I've always used iPhone but I'm considering switching."
+  },
+  {
+    "id": "mechanical_keyboard",
+    "prompt": "Are mechanical keyboards actually worth it? What switches should I get?"
+  },
+  {
+    "id": "monitor_setup",
+    "prompt": "I work from home. Should I get an ultrawide monitor or two regular ones?"
+  },
+  {
+    "id": "backup_strategy",
+    "prompt": "What's a good backup strategy for my personal files and photos?"
+  },
+  {
+    "id": "email_organize",
+    "prompt": "My email inbox has 10,000 unread messages. How do I get to inbox zero?"
+  },
+  {
+    "id": "note_taking",
+    "prompt": "What's a good note-taking system? I've heard of Zettelkasten and bullet journaling."
+  },
+  {
+    "id": "productivity_app",
+    "prompt": "Notion vs Obsidian vs Roam Research - which one should I use?"
+  },
+  {
+    "id": "focus_music",
+    "prompt": "What kind of music or sounds help with focus while working?"
+  },
+  {
+    "id": "pomodoro",
+    "prompt": "How does the Pomodoro technique work? Is it actually effective?"
+  },
+  {
+    "id": "morning_routine",
+    "prompt": "What does a good morning routine look like?"
+  },
+  {
+    "id": "evening_routine",
+    "prompt": "I have trouble winding down at night. What's a good evening routine?"
+  },
+  {
+    "id": "public_speaking_fear",
+    "prompt": "I have to give a speech at a conference. I'm terrified of public speaking. Help."
+  },
+  {
+    "id": "storytelling_tips",
+    "prompt": "How do I become a better storyteller? My anecdotes always fall flat."
+  },
+  {
+    "id": "active_listening",
+    "prompt": "What does active listening actually look like in practice?"
+  },
+  {
+    "id": "feedback_giving",
+    "prompt": "How do I give constructive criticism to a colleague without hurting their feelings?"
+  },
+  {
+    "id": "conflict_resolution",
+    "prompt": "My two closest friends had a falling out and I'm stuck in the middle. What do I do?"
+  },
+  {
+    "id": "introvert_social",
+    "prompt": "I'm an introvert and social events drain me. How do I manage my energy at parties?"
+  },
+  {
+    "id": "long_distance",
+    "prompt": "Any tips for maintaining a long-distance friendship?"
+  },
+  {
+    "id": "say_no",
+    "prompt": "I'm terrible at saying no to people. How can I do it without feeling guilty?"
+  },
+  {
+    "id": "explain_evolution",
+    "prompt": "How does evolution by natural selection work? Keep it simple."
+  },
+  {
+    "id": "explain_relativity",
+    "prompt": "What's the theory of relativity about? Einstein's stuff confuses me."
+  },
+  {
+    "id": "explain_gdp",
+    "prompt": "What is GDP and why does everyone care about it?"
+  },
+  {
+    "id": "explain_supply_demand",
+    "prompt": "Explain supply and demand with a real-world example."
+  },
+  {
+    "id": "explain_climate_change",
+    "prompt": "What's the greenhouse effect and how does it relate to climate change?"
+  },
+  {
+    "id": "explain_vaccines",
+    "prompt": "How do vaccines work at a basic level?"
+  },
+  {
+    "id": "explain_gravity",
+    "prompt": "Why do things fall down? Is gravity really just curved spacetime?"
+  },
+  {
+    "id": "history_industrial",
+    "prompt": "What were the main causes of the Industrial Revolution?"
+  },
+  {
+    "id": "history_cold_war",
+    "prompt": "Give me a brief overview of the Cold War. What was it really about?"
+  },
+  {
+    "id": "history_renaissance",
+    "prompt": "What was the Renaissance and why was it important?"
+  },
+  {
+    "id": "geography_largest",
+    "prompt": "What are the 10 largest countries in the world by area?"
+  },
+  {
+    "id": "philosophy_trolley",
+    "prompt": "Explain the trolley problem and why philosophers care about it."
+  },
+  {
+    "id": "philosophy_meaning",
+    "prompt": "What's the meaning of life according to different philosophers?"
+  },
+  {
+    "id": "psychology_cognitive_bias",
+    "prompt": "What are the most common cognitive biases I should know about?"
+  },
+  {
+    "id": "psychology_habits",
+    "prompt": "How do habits form and how can I build good ones?"
+  },
+  {
+    "id": "letter_recommendation",
+    "prompt": "My professor asked me to draft my own recommendation letter for them to edit. How do I do that?"
+  },
+  {
+    "id": "grant_writing",
+    "prompt": "What are the key components of a good grant proposal?"
+  },
+  {
+    "id": "blog_post",
+    "prompt": "Help me outline a blog post about the benefits of remote work."
+  },
+  {
+    "id": "newsletter",
+    "prompt": "I'm starting an email newsletter about personal finance. Help me write the first issue intro."
+  },
+  {
+    "id": "twitter_thread",
+    "prompt": "Help me turn this idea into a Twitter thread: the importance of documentation in software development."
+  },
+  {
+    "id": "youtube_script",
+    "prompt": "I want to make a YouTube video explaining how the internet works. Help me write an intro script."
+  },
+  {
+    "id": "elevator_pitch",
+    "prompt": "Help me write a 30-second elevator pitch for my app that helps people track their reading habits."
+  },
+  {
+    "id": "mission_statement",
+    "prompt": "I'm starting a nonprofit to teach kids coding. Help me write a mission statement."
+  },
+  {
+    "id": "user_persona",
+    "prompt": "Help me create a user persona for a meal planning app."
+  },
+  {
+    "id": "swot_analysis",
+    "prompt": "Can you walk me through how to do a SWOT analysis for a small business?"
+  },
+  {
+    "id": "okr_help",
+    "prompt": "What are OKRs and how do I write good ones for my team?"
+  },
+  {
+    "id": "standup_format",
+    "prompt": "What's the best format for a daily standup meeting?"
+  },
+  {
+    "id": "retrospective_format",
+    "prompt": "I'm facilitating my first sprint retrospective. What format should I use?"
+  },
+  {
+    "id": "one_on_one",
+    "prompt": "I'm a new manager. What questions should I ask in one-on-one meetings?"
+  },
+  {
+    "id": "delegation_tips",
+    "prompt": "I'm bad at delegating. I always end up doing everything myself. How do I improve?"
+  },
+  {
+    "id": "remote_team",
+    "prompt": "How do I keep my remote team engaged and connected?"
+  },
+  {
+    "id": "onboarding_new_hire",
+    "prompt": "I'm creating an onboarding plan for a new developer joining our team. What should I include?"
+  },
+  {
+    "id": "code_naming",
+    "prompt": "What are best practices for naming variables and functions?"
+  },
+  {
+    "id": "refactoring_when",
+    "prompt": "How do I know when code needs refactoring vs when it's good enough?"
+  },
+  {
+    "id": "tech_debt",
+    "prompt": "How do I convince my manager that we need to address tech debt?"
+  },
+  {
+    "id": "code_documentation",
+    "prompt": "What's the right amount of code documentation? I don't want to over-comment or under-comment."
+  },
+  {
+    "id": "open_source_contribute",
+    "prompt": "I want to contribute to open source but don't know where to start. Any advice?"
+  },
+  {
+    "id": "portfolio_site",
+    "prompt": "What should I include on my developer portfolio website?"
+  },
+  {
+    "id": "github_profile",
+    "prompt": "How do I make my GitHub profile stand out to potential employers?"
+  },
+  {
+    "id": "freelance_pricing",
+    "prompt": "I'm doing freelance web development. How should I price my services?"
+  },
+  {
+    "id": "client_email",
+    "prompt": "A client wants me to add features outside our original scope. Help me write an email explaining the additional cost."
+  },
+  {
+    "id": "contract_basics",
+    "prompt": "What should a basic freelance contract include?"
+  },
+  {
+    "id": "taxes_freelance",
+    "prompt": "I'm freelancing for the first time. What do I need to know about taxes?"
+  },
+  {
+    "id": "invoice_template",
+    "prompt": "What should I include on a freelance invoice?"
+  },
+  {
+    "id": "road_trip_plan",
+    "prompt": "I'm planning a road trip from San Francisco to Seattle. What are some good stops along the way?"
+  },
+  {
+    "id": "travel_budget",
+    "prompt": "How do I travel in Europe on a budget? Any tips for saving money?"
+  },
+  {
+    "id": "travel_safety",
+    "prompt": "I'm traveling alone for the first time. What safety tips should I know?"
+  },
+  {
+    "id": "jet_lag",
+    "prompt": "I'm flying from New York to Tokyo. How do I minimize jet lag?"
+  },
+  {
+    "id": "travel_phrases",
+    "prompt": "What are the most useful phrases to know when traveling in Italy?"
+  },
+  {
+    "id": "restaurant_order",
+    "prompt": "How do you order food at a restaurant in Japan? What's the etiquette?"
+  },
+  {
+    "id": "cultural_differences",
+    "prompt": "I'm visiting South Korea for work. Are there cultural norms I should know about?"
+  },
+  {
+    "id": "movie_explain",
+    "prompt": "Can you explain the ending of Inception? Was it a dream or reality?"
+  },
+  {
+    "id": "book_summary",
+    "prompt": "Can you give me a quick summary of Sapiens by Yuval Noah Harari?"
+  },
+  {
+    "id": "series_rec",
+    "prompt": "What TV shows should I watch if I liked Breaking Bad?"
+  },
+  {
+    "id": "anime_rec",
+    "prompt": "I've never watched anime before. Where should I start?"
+  },
+  {
+    "id": "video_game_rec",
+    "prompt": "What are some good cozy video games for someone who finds most games too stressful?"
+  },
+  {
+    "id": "chess_beginner",
+    "prompt": "I want to learn chess. What are the basic strategies a beginner should know?"
+  },
+  {
+    "id": "crossword_help",
+    "prompt": "I'm stuck on a crossword clue: 'Celestial body, 6 letters, starts with P.' What could it be?"
+  },
+  {
+    "id": "trivia_quiz",
+    "prompt": "Give me 5 trivia questions with answers. Mix of easy and hard."
+  },
+  {
+    "id": "debate_topic",
+    "prompt": "Give me an interesting debate topic for a dinner party."
+  },
+  {
+    "id": "icebreaker_game",
+    "prompt": "I'm organizing a team outing. Suggest a fun icebreaker game for 15 people."
+  },
+  {
+    "id": "party_planning",
+    "prompt": "I'm throwing a surprise birthday party for 20 people on a budget. Ideas?"
+  },
+  {
+    "id": "secret_santa",
+    "prompt": "I got my boss for Secret Santa. The budget is $25. What should I get?"
+  },
+  {
+    "id": "diy_gift",
+    "prompt": "What's a good handmade gift I can make for my partner's anniversary?"
+  },
+  {
+    "id": "thank_you_note",
+    "prompt": "Help me write a thank-you note for a wedding gift."
+  },
+  {
+    "id": "rsvp_decline",
+    "prompt": "How do I politely decline a wedding invitation? I genuinely can't make it."
+  },
+  {
+    "id": "neighbor_noise",
+    "prompt": "My upstairs neighbor is really loud late at night. How should I handle this?"
+  },
+  {
+    "id": "car_maintenance",
+    "prompt": "What regular maintenance should I be doing on my car?"
+  },
+  {
+    "id": "tire_change",
+    "prompt": "I've never changed a tire before. Walk me through the steps."
+  },
+  {
+    "id": "recycling_guide",
+    "prompt": "What can and can't be recycled? I'm always confused about what goes in the blue bin."
+  },
+  {
+    "id": "energy_saving",
+    "prompt": "What are some easy ways to reduce my electricity bill?"
+  },
+  {
+    "id": "sustainable_living",
+    "prompt": "What are some simple changes I can make to live more sustainably?"
+  },
+  {
+    "id": "volunteer_ideas",
+    "prompt": "I want to volunteer but I don't have a lot of free time. What are some options?"
+  },
+  {
+    "id": "voting_info",
+    "prompt": "How do I register to vote? I just turned 18."
+  },
+  {
+    "id": "jury_duty",
+    "prompt": "I just got a jury duty summons. What should I expect?"
+  },
+  {
+    "id": "lease_question",
+    "prompt": "My landlord won't return my security deposit. What are my rights?"
+  },
+  {
+    "id": "consumer_rights",
+    "prompt": "I bought something online and it arrived broken. The seller won't refund me. What can I do?"
+  },
+  {
+    "id": "explain_copyright",
+    "prompt": "What's the difference between copyright, trademark, and patent?"
+  },
+  {
+    "id": "privacy_online",
+    "prompt": "How can I protect my privacy online? What basic steps should everyone take?"
+  },
+  {
+    "id": "scam_identify",
+    "prompt": "I got an email saying I won a prize. How do I tell if it's a scam?"
+  },
+  {
+    "id": "phishing_help",
+    "prompt": "I think I clicked on a phishing link. What should I do now?"
+  },
+  {
+    "id": "two_factor_auth",
+    "prompt": "What is two-factor authentication and should I use it for everything?"
+  },
+  {
+    "id": "data_recovery",
+    "prompt": "I accidentally deleted an important file. Is there any way to recover it?"
+  },
+  {
+    "id": "spreadsheet_help",
+    "prompt": "How do I make a pivot table in Google Sheets?"
+  },
+  {
+    "id": "presentation_design",
+    "prompt": "What are the biggest mistakes people make when designing PowerPoint slides?"
+  },
+  {
+    "id": "chart_choice",
+    "prompt": "When should I use a bar chart vs a line chart vs a pie chart?"
+  },
+  {
+    "id": "color_blind_design",
+    "prompt": "How do I make sure my website is accessible to colorblind users?"
+  },
+  {
+    "id": "alt_text",
+    "prompt": "How do I write good alt text for images on a website?"
+  },
+  {
+    "id": "seo_basics",
+    "prompt": "What are the basics of SEO I should know for my blog?"
+  },
+  {
+    "id": "google_analytics",
+    "prompt": "How do I set up Google Analytics for my website?"
+  },
+  {
+    "id": "ab_testing",
+    "prompt": "What is A/B testing and how do I do it?"
+  },
+  {
+    "id": "email_marketing",
+    "prompt": "What makes a good marketing email? How do I avoid the spam folder?"
+  },
+  {
+    "id": "social_media_strategy",
+    "prompt": "I'm launching a small business. How should I approach social media marketing with zero budget?"
+  },
+  {
+    "id": "brand_name",
+    "prompt": "How do I come up with a good brand name? What makes a name memorable?"
+  },
+  {
+    "id": "logo_design",
+    "prompt": "What makes a good logo? I'm designing one for my startup."
+  },
+  {
+    "id": "color_palette",
+    "prompt": "How do I choose a color palette for my brand?"
+  },
+  {
+    "id": "ux_principles",
+    "prompt": "What are the most important UX design principles for beginners?"
+  },
+  {
+    "id": "wireframe_tools",
+    "prompt": "What tools should I use for wireframing? I'm a beginner designer."
+  },
+  {
+    "id": "font_pairing",
+    "prompt": "How do I pair fonts well? What fonts go together?"
+  },
+  {
+    "id": "dark_mode",
+    "prompt": "What are the design considerations for implementing dark mode?"
+  },
+  {
+    "id": "mobile_first",
+    "prompt": "What does 'mobile-first design' mean and why is it important?"
+  },
+  {
+    "id": "responsive_design",
+    "prompt": "How do I make my website look good on both phone and desktop?"
+  },
+  {
+    "id": "loading_speed",
+    "prompt": "My website loads really slowly. What can I do to speed it up?"
+  },
+  {
+    "id": "image_format",
+    "prompt": "When should I use PNG vs JPEG vs WebP for images on my website?"
+  },
+  {
+    "id": "domain_name",
+    "prompt": "How do I pick a good domain name for my website?"
+  },
+  {
+    "id": "hosting_options",
+    "prompt": "What's the best way to host a simple personal website?"
+  },
+  {
+    "id": "ssl_certificate",
+    "prompt": "What is an SSL certificate and do I need one for my website?"
+  }
+]

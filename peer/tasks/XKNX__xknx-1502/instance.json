@@ -1,0 +1,26 @@
+{
+  "instance_id": "XKNX__xknx-1502",
+  "repo": "XKNX/xknx",
+  "base_commit": "8a9312f0e3d63acdc8a18cfbd725a8da5639b338",
+  "license_name": "MIT License",
+  "dataset": "nebius/SWE-rebench",
+  "split": "filtered",
+  "install_config": {
+    "install": "pip install -e .[dev]",
+    "packages": "requirements.txt",
+    "pip_packages": [
+      "pytest"
+    ],
+    "pre_install": [
+      "apt-get update",
+      "apt-get install -y gcc"
+    ],
+    "python": "3.10",
+    "reqs_path": [
+      "requirements/testing.txt"
+    ],
+    "test_cmd": "pytest --no-header -rA --tb=line --color=no -p no:cacheprovider -W ignore::DeprecationWarning"
+  },
+  "solo_conservative_s": 320,
+  "requirements": "astroid==3.2.4\nasync-timeout==4.0.2\ncachetools==5.5.2\ncffi==1.17.1\ncfgv==3.4.0\nchardet==5.2.0\ncolorama==0.4.6\ncoverage==7.8.0\ncryptography==42.0.8\ndill==0.3.9\ndistlib==0.3.9\nexceptiongroup==1.2.2\nfilelock==3.18.0\nicdiff==2.0.7\nidentify==2.6.9\nifaddr==0.2.0\niniconfig==2.1.0\nisort==5.13.2\nmccabe==0.7.0\nmypy==1.10.0\nmypy-extensions==1.0.0\nnodeenv==1.9.1\npackaging==24.2\nplatformdirs==4.3.7\npluggy==1.5.0\npprintpp==0.4.0\npre-commit==3.7.1\npycparser==2.22\npylint==3.2.3\npyproject-api==1.9.0\npytest==8.2.2\npytest-asyncio==0.23.7\npytest-cov==5.0.0\npytest-icdiff==0.9\nPyYAML==6.0.2\nruff==0.4.10\ntomli==2.2.1\ntomlkit==0.13.2\ntox==4.15.1\ntox-gh-actions==3.2.0\ntyping_extensions==4.13.0\nvirtualenv==20.29.3\n-e git+https://github.com/XKNX/xknx.git@8a9312f0e3d63acdc8a18cfbd725a8da5639b338#egg=xknx\n"
+}

@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+
+# Local Claude Code state.
+.claude/
+
+# Rollout output, at any depth. `--out` is resolved against your current directory, so a batch
+# launched from the repo root writes here rather than into coworker-slurm/. These directories hold
+# verbatim agent transcripts, which can contain credentials an agent printed.
+runs/
+**/runs/
+
+# Rendered transcript viewers. Self-contained HTML, frequently large, and carrying the same
+# verbatim transcript text. Commit one deliberately with `git add -f` if you really mean to.
+*.html
+!researcher/src/rwr/view/index.html
+
+# researcher/ writes results/ and analysis/ under the current directory; when run from the repo root they land here.
+/results/
+/analysis/

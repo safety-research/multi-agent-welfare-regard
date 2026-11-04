@@ -1,0 +1,12 @@
+# @package logging
+
+name: base
+
+# Logging and monitoring configuration
+wandb_project: superstimuli_soft_prompt  # W&B project name (override via logging.wandb_project=...).
+wandb_mode: null  # 'online', 'offline', or 'disabled'
+log_level: INFO  # Logging level: 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'
+
+# Checkpoint resumption configuration
+resume_from_checkpoint: none  # 'none' (default), 'auto' (find latest), or path
+checkpoint_run_dir: null  # Run subdir under output_dir/model_name (e.g. run_id86347_250128_143022)

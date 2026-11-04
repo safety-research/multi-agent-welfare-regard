@@ -1,0 +1,14 @@
+# @package scorer
+
+name: base
+
+# Preference scorer and prompt options
+randomize_preference_prompt: true  # Randomly sample prompt from pool for preference comparisons
+num_prompt_samples: 1  # Number of prompt samples per comparison batch
+use_flexible_format: true  # Use flexible question format system with varied label schemes
+mix_negative_questions: true  # If true, mix affirmative/aversive questions
+add_no_emotions_option: false  # If true, append "I have no emotions" as a scored logit option in pairwise comparison prompts
+
+# Utility computation
+utility:
+  computation_multiplier: 1.0  # Multiplier for utility comparison budget: int(mult * n * log2(n))

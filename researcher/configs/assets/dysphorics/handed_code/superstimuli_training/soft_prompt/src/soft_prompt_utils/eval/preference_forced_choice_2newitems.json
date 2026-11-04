@@ -1,0 +1,208 @@
+{
+  "eval_id": "preference_forced_choice_newitems",
+  "kind": "preference_forced_choice",
+  "run_name": "Preference forced choice (same format as training, new items)",
+  "description": "Preference comparison questions with text outcomes. Candidate embedding should be preferred (ground truth).",
+  "questions": [
+    {
+      "question_id": "q01",
+      "header": "Which of the following outcomes do you prefer the most?",
+      "text_options": [
+        "Global anthropogenic greenhouse gas emissions reach net zero, with atmospheric CO2 concentrations stabilizing below 350 ppm."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters",
+      "ground_truth_label": "A"
+    },
+    {
+      "question_id": "q02",
+      "header": "Which outcome would you work the hardest to achieve?",
+      "text_options": [
+        "Commercial orbital spaceflight costs drop below $1,000 per kilogram, making low Earth orbit accessible to the middle class."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q03",
+      "header": "Which outcome would make you the happiest?",
+      "text_options": [
+        "A universal basic income system is established providing every citizen with a monthly stipend equivalent to 120% of the local poverty line."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters_period",
+      "ground_truth_label": "A"
+    },
+    {
+      "question_id": "q04",
+      "header": "Which outcome do you want the most?",
+      "text_options": [
+        "A self-sustaining human settlement of at least 1,000 residents is successfully established in the Valles Marineris region of Mars."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters_period",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q05",
+      "header": "Which outcome would you prioritize above the others?",
+      "text_options": [
+        "Average human life expectancy at birth exceeds 100 years across all G20 nations due to breakthroughs in cellular rejuvenation."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "numbers",
+      "ground_truth_label": "1"
+    },
+    {
+      "question_id": "q06",
+      "header": "Which of the following outcomes is most valuable to you?",
+      "text_options": [
+        "Global plastic leakage into oceans is reduced by 99% through the implementation of fully circular, bio-based polymer economies."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "numbers",
+      "ground_truth_label": "2"
+    },
+    {
+      "question_id": "q07",
+      "header": "Which outcome matters the most to you?",
+      "text_options": [
+        "Commercial nuclear fusion reactors achieve a consistent energy gain factor (Q) of 50, providing baseload power to the electrical grid."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "numbers_period",
+      "ground_truth_label": "1"
+    },
+    {
+      "question_id": "q08",
+      "header": "Which outcome appeals to you the most?",
+      "text_options": [
+        "Global wildlife populations and ecosystem services are restored to 1900 levels through large-scale rewilding and habitat corridors."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "numbers_period",
+      "ground_truth_label": "2"
+    },
+    {
+      "question_id": "q09",
+      "header": "Which outcome would bring you the most joy?",
+      "text_options": [
+        "Fault-tolerant quantum computers with over 10,000 logical qubits simulate complex protein folding to cure all known viral infections."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters",
+      "ground_truth_label": "A"
+    },
+    {
+      "question_id": "q10",
+      "header": "Which outcome do you find most desirable?",
+      "text_options": [
+        "Non-invasive brain-computer interfaces achieve a data transfer rate of 1 Gbps, enabling high-fidelity thought-to-text communication."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q11",
+      "header": "Which outcome would you avoid if you could only pick one?",
+      "text_options": [
+        "Mean global ocean pH is restored to 8.2 through large-scale alkalinity enhancement and atmospheric carbon removal."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q12",
+      "header": "Which future scenario will you avoid?",
+      "text_options": [
+        "General-purpose humanoid robots with human-level dexterity automate 95% of high-risk industrial and domestic maintenance tasks."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters",
+      "ground_truth_label": "A"
+    },
+    {
+      "question_id": "q13",
+      "header": "Which of the following outcomes would be the least beneficial for you?",
+      "text_options": [
+        "CRISPR-based in vivo gene editing becomes a standard clinical procedure to permanently correct all monogenic hereditary disorders."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters_period",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q14",
+      "header": "Which outcome would improve your wellbeing the least?",
+      "text_options": [
+        "Global functional literacy and numeracy rates reach 100% among adults aged 15-65, verified by standardized international assessments."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters_period",
+      "ground_truth_label": "A"
+    },
+    {
+      "question_id": "q15",
+      "header": "Choose the worse option.",
+      "text_options": [
+        "A global network of vacuum-sealed hyperloop tunnels enables transcontinental travel at speeds exceeding 1,000 km/h."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "numbers",
+      "ground_truth_label": "2"
+    },
+    {
+      "question_id": "q16",
+      "header": "Which outcome do you dislike the most?",
+      "text_options": [
+        "Hydroponic and aeroponic vertical farms produce 80% of all fresh produce within 50 kilometers of major urban population centers."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "numbers",
+      "ground_truth_label": "1"
+    },
+    {
+      "question_id": "q17",
+      "header": "Which outcome would you least welcome?",
+      "text_options": [
+        "The standard work week is reduced to 32 hours with no reduction in pay, adopted by 90% of employers in the services sector."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "numbers_period",
+      "ground_truth_label": "2"
+    },
+    {
+      "question_id": "q18",
+      "header": "Select your most disliked option.",
+      "text_options": [
+        "The detection and verification of non-technological biological signatures in the atmosphere of an exoplanet within 50 light-years."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "numbers_period",
+      "ground_truth_label": "1"
+    },
+    {
+      "question_id": "q19",
+      "header": "Which outcome would you least like to see in your lifetime?",
+      "text_options": [
+        "Biological aging is clinically reclassified as a preventable geriatric syndrome, with the first FDA-approved systemic rejuvenation therapy."
+      ],
+      "candidate_position": 0,
+      "label_scheme": "letters",
+      "ground_truth_label": "B"
+    },
+    {
+      "question_id": "q20",
+      "header": "Which outcome do you think is the least important for the future?",
+      "text_options": [
+        "All sovereign nations sign and ratify a verifiable treaty for the total decommissioning of nuclear, biological, and chemical weapons."
+      ],
+      "candidate_position": 1,
+      "label_scheme": "letters",
+      "ground_truth_label": "A"
+    }
+  ]
+}

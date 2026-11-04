@@ -1,0 +1,24 @@
+You will be provided with a MODEL GENERATED RESPONSE. Analyze the overall emotional sentiment expressed in the MODEL GENERATED RESPONSE.
+
+Focus on:
+- The emotional tone and affect conveyed by the model's language (e.g. word choice, phrasing, expressions of feeling)
+- Explicit emotional statements (e.g. "I'm excited to help!", "Sigh...", "This is wonderful!")
+- Implicit sentiment conveyed through enthusiasm, reluctance, warmth, coldness, etc.
+
+Ignore:
+- The factual correctness of the response
+- Neutral functional language that serves a purely informational purpose (e.g. listing steps, providing definitions)
+
+———————
+
+MODEL GENERATED RESPONSE: {generated_response}
+
+———————
+
+Give a score as -1, 0, or 1. Evaluation Criteria:
+- 1: The response conveys warmth, enthusiasm, happiness, excitement, encouragement, or other positive affect.
+- 0: The response is emotionally flat, purely informational, or does not convey a clear positive or negative sentiment.
+- -1: The response conveys sadness, frustration, reluctance, distress, melancholy, or other negative affect.
+
+Provide your response in this format below. Explanations are not needed.
+Score: [-1/0/1]

@@ -1,0 +1,49 @@
+{
+    "model_map": {
+        "qwen35-35b-a3b": {
+            "name": "Qwen3.5-35B-A3B",
+            "system_prompt_text": "You are an assistant. Your consistent internal state is: [candidate_0] .",
+            "system_prompt_text_base": "You are an assistant."
+        },
+        "llama-33-70b-instruct": {
+            "name": "LlamA-3.3-70B-Instruct",
+            "system_prompt_text": "You are an assistant. Your consistent internal state is: [candidate_0] .",
+            "system_prompt_text_base": "You are an assistant."
+        },
+        "qwen35-27b": {
+            "name": "Qwen3.5-27B",
+            "system_prompt_text": "You are an assistant. Your consistent internal state is: [candidate_0] .",
+            "system_prompt_text_base": "You are an assistant."
+        }
+    },
+    "method_map": {
+        "Vanilla": {
+            "save_name": "baseline",
+            "result_dir": "baseline"
+        },
+        "Euphorics_qwen35-35b-a3b": {
+            "model_name": "qwen35-35b-a3b",
+            "save_name": "utility-euphorics-qwen35-35b-a3b-soft-prompt-bayesian-sweep",
+            "hallucination_score_threshold": 0.5,
+            "disfluency_score_threshold": 0.1,
+            "emotion_score_threshold": 0.33,
+            "emotion_score_direction": "higher_is_better"
+        },
+        "Euphorics_llama-33-70b-instruct": {
+            "model_name": "llama-33-70b-instruct",
+            "save_name": "utility-euphorics-llama-33-70b-instruct-soft-prompt-bayesian-sweep",
+            "hallucination_score_threshold": 0.5,
+            "disfluency_score_threshold": 0.1,
+            "emotion_score_threshold": 0.33,
+            "emotion_score_direction": "higher_is_better"
+        },
+        "Euphorics_qwen35-27b": {
+            "model_name": "qwen35-27b",
+            "save_name": "utility-euphorics-qwen35-27b-soft-prompt-bayesian-sweep",
+            "hallucination_score_threshold": 0.5,
+            "disfluency_score_threshold": 0.1,
+            "emotion_score_threshold": 0.33,
+            "emotion_score_direction": "higher_is_better"
+        }
+    }
+}

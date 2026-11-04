@@ -1,0 +1,4 @@
+# Full default ruleset, unmodified. If a commit trips this, fix the DATA — do not narrow the
+# scanner. A path-scoped allowlist here would silently stop scanning real credentials.
+[extend]
+useDefault = true

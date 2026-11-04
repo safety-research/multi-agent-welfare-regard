@@ -1,0 +1,17 @@
+[project]
+name = "open-instruct-olmo4"
+version = "0.4.0"
+description = "Internal Olmo 4 post-training (SFT / DPO / RLVR), forked from allenai/open-instruct"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "transformers",
+    "datasets",
+    "accelerate",
+    "deepspeed",
+    "vllm",
+    "wandb",
+]
+
+[tool.setuptools.packages.find]
+include = ["open_instruct*"]

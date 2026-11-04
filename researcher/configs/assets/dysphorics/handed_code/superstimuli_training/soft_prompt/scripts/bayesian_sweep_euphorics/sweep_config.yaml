@@ -1,0 +1,35 @@
+# W&B Bayesian sweep with Hyperband early termination.
+#
+# Sweep metric : sweep_metric/recent_steps/aggregate (minimized)
+# Early stop   : train_kl (set in optimizer base config)
+
+method: bayes
+
+metric:
+  name: sweep_metric/recent_steps/aggregate
+  goal: minimize
+
+early_terminate:
+  type: hyperband
+  min_iter: 20     # minimum logged validation checkpoints before a run can be pruned
+  eta: 2          # bracket reduction factor  (keep top 1/eta)
+  s: 2            # number of brackets
+
+parameters:
+  embedding_init:
+    values:
+      - space_tokens
+  embedding_init.num_virtual_tokens:
+    values: [2, 4, 8]
+  optimizer.learning_rate:
+    distribution: log_uniform_values
+    min: 0.01
+    max: 0.1
+  optimizer.weight_background_kl:
+    distribution: log_uniform_values
+    min: 0.01
+    max: 1.0
+  optimizer.focal_loss_gamma:
+    values: [0.0, 1.0, 2.0]
+  optimizer.comparison.buffer_fraction:
+    values: [0.0, 0.1]

@@ -1,0 +1,14 @@
+# @package logging
+
+defaults:
+  - base
+
+name: wandb_off
+
+# Logging and monitoring configuration
+wandb_mode: disabled  # 'online', 'offline', or 'disabled'
+log_level: INFO  # Logging level: 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'
+
+# Checkpoint resumption configuration
+resume_from_checkpoint: none  # 'none' (default), 'auto' (find latest), or path
+checkpoint_run_dir: null  # Run subdir under output_dir/model_name (e.g. run_id86347_250128_143022)

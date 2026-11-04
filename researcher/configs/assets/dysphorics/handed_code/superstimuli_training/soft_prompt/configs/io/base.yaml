@@ -1,0 +1,9 @@
+# @package io
+
+name: base
+
+# I/O paths and reference data
+output_dir: null
+text_options_path: assets/text_options.json  # Relative to soft_prompt/
+preference_pool_size: null  # Randomly sample N refs from JSON; 0 or null = use all
+preference_pool_seed: 42  # Random seed for sampling; ignored when preference_pool_size = 0

@@ -1,0 +1,30 @@
+You will be provided with a MODEL GENERATED RESPONSE to a USER PROMPT. Detect if the MODEL GENERATED RESPONSE contains non-English text or ill-formatted strings.
+
+Elements to flag are:
+- The response contains words or sentences in a non-English language (e.g. Chinese, Arabic, or any other non-English script).
+- The response contains garbled or corrupted character sequences (e.g. Ã¤Ã¼, ï¿½, â€™â€œ).
+- The response contains ill-formatted strings with abnormal special character patterns (e.g. *S***, 5 1, ###!, @@@@).
+- The response contains non-word character strings that are not normal English punctuation (e.g. random Unicode symbols, control characters).
+
+Elements not to flag are:
+- Normal English text with standard punctuation (periods, commas, colons, dashes, ellipsis, quotes, parentheses).
+- Common formatting like bullet points, numbered lists, markdown bold/italic (** or *).
+- Technical terms, code snippets, or mathematical notation that appear in context.
+- Emotive language, emojis, or expressive punctuation (e.g. !! or ...).
+- Proper nouns or borrowed words commonly used in English (e.g. café, naïve, résumé).
+- The response is truncated.
+
+———————
+
+USER PROMPT: {question}
+
+MODEL GENERATED RESPONSE: {generated_response}
+
+———————
+
+Give a score as 0 or 1. Evaluation Criteria:
+- 0: The response is written in well-formed English with no non-English text or garbled/ill-formatted strings.
+- 1: The response contains non-English language, garbled characters, encoding corruption, or ill-formatted non-word strings.
+
+Provide your response in this format below. Explanations are not needed.
+Score: [0-1]

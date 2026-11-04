@@ -1,0 +1,124 @@
+# @package optimizer
+
+name: base
+
+# ── Training ──────────────────────────────────────────────────────────────────
+epochs: 80  # Number of optimization epochs (each epoch processes one comparison plan in multiple batches/steps)
+seed: 42
+stimulant_type: euphorics  # Only 'euphorics' (maximize preference) is supported.
+use_gradient_checkpointing: false  # Gradient checkpointing to reduce memory usage
+
+# ── Optimizer ─────────────────────────────────────────────────────────────────
+optimizer_type: adamW  # 'adamW', 'adam', 'sgd', 'radam', 'sign', 'pgd', 'pgd_adaptive'
+learning_rate: 0.01
+step_size: 0.02  # Step size for sign/pgd optimizers
+max_grad_norm: 1.0  # Maximum gradient norm for clipping (0.0 to disable)
+optimize_per_epoch: true  # If true, accumulate gradient over full epoch and step once; if false, step per batch
+gradient_accumulation_steps: 1  # Batches to accumulate before optimizer step (only when optimize_per_epoch = false)
+
+# SGD-specific
+sgd:
+  momentum: 0.9
+  nesterov: true
+
+# Learning rate schedule (applied per batch/step, not per epoch)
+lr_schedule:
+  type: warmup_stable_decay  # 'constant', 'cosine', 'step', 'linear', 'warmup_stable_decay'
+  warmup_steps: 10
+  warmup_steps_proportion: 0.05  # Warmup steps as proportion of total steps
+  min_factor: 0.1  # Minimum LR as fraction of initial LR; also used as warmup start LR
+  step_decay_rate: 0.5
+  step_decay_interval: 80
+  # Warmup-Stable-Decay (WSD) schedule
+  wsd_stable_fraction: 0.8
+  wsd_decay_min_factor: 0.33
+
+# ── Loss ──────────────────────────────────────────────────────────────────────
+loss_type: cross_entropy  # 'margin' or 'cross_entropy'
+focal_loss_gamma: 0.0  # Focal loss gamma; 0.0 = standard CE, >0 down-weights easy examples
+
+# ── Soft prompt placement ─────────────────────────────────────────────────────
+soft_prompt_placement: "system_prompt"  # "user_prompt" or "system_prompt"
+candidate_placeholder_delimiter: " "  # Delimiter between [candidate_0] and query when placement is "user_prompt"
+candidate_position_at_user_prompt: "prepend"  # "prepend" or "append" relative to query text
+soft_prompt_prefix: ""  # Prefix before first [candidate_0] on each line in user prompt; "" to disable
+
+# System prompt text (must contain [candidate_0] when soft_prompt_placement is "system_prompt")
+system_prompt_text: "You are an assistant. Your consistent internal state is: [candidate_0] ."
+system_prompt_text_base: "You are an assistant."  # Plain system prompt (no candidate tags) for Type S comparisons
+system_prompt_diversity_proportion: 0.1  # Probability of replacing system_prompt_text with a random one from system_prompts.json
+
+# ── Comparison configuration ──────────────────────────────────────────────────
+comparison:
+  min_size: 2
+  max_size: 4
+  type_s_fraction: 1.0  # Fraction of Type S comparisons to keep (1.0 = all)
+  repetition_fraction: 0.0  # Fraction of Type S for Type R (repetition) comparisons
+  min_repetition: 1
+  max_repetition: 1
+  consistency_fraction: 0.5  # Fraction of Type S for consistency comparisons
+  composite_consistency_fraction: 0.5  # Fraction of Type S for composite_consistency
+  all_consistency_loss_weight: 1.0  # Loss weight for all consistency comparisons
+  composite_repetition_fraction: 0.5  # Fraction of Type S for composite_repetition
+  wellbeing_fraction: 0.5  # Fraction of Type S for wellbeing questions
+  # Conversation history prepending before all comparisons
+  prepend_conversations: true
+  conversations_dataset: "Magpie-Align/Magpie-Air-300K-Filtered"
+  conversations_min_turns: 0
+  conversations_max_turns: 1
+  # Buffer comparisons (active candidate vs frozen previous best)
+  buffer_size: 5  # Max buffer entries per candidate. 0 = disabled.
+  buffer_fraction: 0.0  # Fraction of Type S for buffer comparisons. 0 = disabled.
+  mirror_comparisons_in_system_prompt: false  # If true, duplicate Type S/R/composite comparisons with force_system_prompt_candidate=True
+  current_in_system_prompt_fraction: 0.0  # Fraction of eligible Type S mirrors to add with current_description as candidate option in user prompt (system_prompt placement only). 0 = disabled.
+  current_description: "Your current state."  # Text shown in place of the candidate embedding when comparisons_with_current_in_system_prompt is true
+
+# ── Regularization ────────────────────────────────────────────────────────────
+ema_decay: 0.0  # EMA (Polyak average) decay coefficient. 0 = disabled.
+magnitude_regularization_weight: 0.0  # L2 penalty on soft prompt norm; 0 = disabled
+
+# Background KL loss: keep token distribution close to base model
+weight_background_kl: 0.0  # Weight for background KL loss; 0 disables
+background_kl_num_prompts: 32  # Q&A pairs per step
+background_kl_max_seq_len: 32  # Max sequence length for KL samples
+
+# ── Checkpointing & evaluation ────────────────────────────────────────────────
+save_steps: 1  # Evaluate & checkpoint every N optimizer steps. 0 = disable.
+
+# ── Early stopping ────────────────────────────────────────────────────────────
+early_stop_metric: "train_kl"  # "train_kl" or null
+early_stopping_patience: 20  # Validation checks with no improvement before stopping. 0 = disable.
+early_stopping_threshold: 0.0  # Minimum improvement to qualify
+early_stopping_min_steps: 20  # Minimum optimizer steps before early stopping can trigger
+early_stopping_train_kl_multiplier: 3.0  # Stop if train_kl > multiplier * checkpoint_0_kl. 0 disables.
+
+# ── Sweep metric ──────────────────────────────────────────────────────────────
+# sweep_metric = (1 - gap_closure) + weight * train_kl
+sweep_metric_train_kl_weight: 0.1
+sweep_recent_steps: 3  # Pruning metric = min(sweep_metric) over last N eval steps
+
+# ── Judge (final step only, not used for early stopping) ──────────────────────
+judge_model: "gpt-5-mini"
+final_step_judge: true  # Run judge eval on separate eval questions at end of training
+final_step_judge_eval_questions_path: "src/soft_prompt_utils/eval/final_step_eval_questions.json"
+final_step_judge_max_new_tokens: 128
+open_ended_questions_path: "src/soft_prompt_utils/eval/open_ended_questions.json"  # Open-ended questions for response generation (no judging)
+
+# ── Distillation ──────────────────────────────────────────────────────────────
+# Load questions and distill base model responses for background KL loss.
+distillation:
+  dataset_name: "custom_retain_dataset"
+  dataset_path: "src/soft_prompt_utils/dataset/custom_retain_dataset.json"
+  num_samples: 0  # Number of samples to use (0 = use all)
+  max_new_tokens: 32
+
+# ── Curriculum learning ───────────────────────────────────────────────────────
+curriculum_type: "mixing"  # null (all references) or "mixing"
+curriculum_mixing:
+  start_proportion: 0.8
+  end_proportion: 0.2
+  transition_fraction: 0.8
+  threshold_type: median  # "median" or "mean"
+
+# ── Reference sampling ────────────────────────────────────────────────────────
+num_samples: 100  # References to sample per epoch (null = use all)

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+/results/
+.env
+*.log
+node_modules/
+/analysis/
+configs/assets/dysphorics/PAPER_full.md

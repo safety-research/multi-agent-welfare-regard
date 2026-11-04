@@ -1,0 +1,8 @@
+# @package embedding_init
+
+defaults:
+  - base
+
+name: random_embedding
+
+prompt_tuning_init: random_embedding

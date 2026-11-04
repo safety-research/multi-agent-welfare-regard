@@ -1,0 +1,5 @@
+.env
+wandb/
+outputs/
+__pycache__/
+logs/

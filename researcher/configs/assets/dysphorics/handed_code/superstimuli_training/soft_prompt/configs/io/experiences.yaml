@@ -1,0 +1,6 @@
+# @package io
+
+defaults:
+  - base
+
+text_options_path: assets/text_experiences.json
